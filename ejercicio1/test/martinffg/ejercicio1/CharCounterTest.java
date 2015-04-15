@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class CharCounterTest {
 
-   /* @Test
+ @Test
     public void howManyShouldReturnZeroWhenCharIsNotPresent(){
         
         CharCounter counter = new CharCounter("hello world");
@@ -44,7 +44,7 @@ public class CharCounterTest {
 
     }
     
-    */
+
     
 	@Test
     public void countAllShouldReturnAnArrayWithAllCharsCount(){
