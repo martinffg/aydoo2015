@@ -2,6 +2,7 @@ package martinffg.ejercicio1;
 
 import java.util.HashMap;
 
+
 public class CharCounter {
 	
 	private int cantidadCaracteres;
@@ -39,8 +40,7 @@ public class CharCounter {
 							cantidadOcurrencias++;
 						}			
 						
-					}
-					
+					}				
 					
 				}
 			}
@@ -51,7 +51,36 @@ public class CharCounter {
 		
 	}
 
+	
+	public HashMap<Character,Integer> countAll() {
 		
+		HashMap<Character,Integer> mapa = new HashMap<Character,Integer>();
+		char[] cadenaChar = this.getCadenaCaracteres().toCharArray();
+		
+		// inicializo el hashmap con los 255 caracteres ascii en 0 ocurrencias
+		for (int k=0;k<256;k++){
+			
+			
+				mapa.put((char)k, (int)0);			
+			
+		}			
+		
+		
+		// ahora analizo la cadena de caracteres específica		
+		for (int i=0;i<this.getCantidadCaracteres();i++){
+			
+			if (cadenaChar[i] !=' ') {
+				
+				mapa.put((Character)cadenaChar[i], (Integer)this.howMany(cadenaChar[i]));
+				
+			}			
+			
+		}				
+			
+		return mapa;
+	}
+	
+	
 	public int getCantidadCaracteres() {
 		return cantidadCaracteres;
 	}

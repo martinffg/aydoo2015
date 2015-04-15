@@ -31,7 +31,7 @@ public class CharCounterTest {
 
         Assert.assertEquals(-1, counter.howMany('$'));
 
-    }*/
+    }
 
 
    
@@ -43,7 +43,9 @@ public class CharCounterTest {
         Assert.assertEquals(-2, counter.howMany('@'));
 
     }
-    /*
+    
+    */
+    
 	@Test
     public void countAllShouldReturnAnArrayWithAllCharsCount(){
         
@@ -54,5 +56,5 @@ public class CharCounterTest {
         Assert.assertTrue(result.get('z').equals(0));
         Assert.assertTrue(result.get('l').equals(3));
     }
-    */	
+    	
 }
