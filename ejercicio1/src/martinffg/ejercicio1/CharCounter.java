@@ -22,24 +22,43 @@ public class CharCounter {
 		int cantidadOcurrencias=0;
 		char[] cadenaChar = this.cadenaCaracteres.toCharArray();
 		
-		if (!this.cadenaCaracteres.isEmpty()){
-			
-			for (int i=0;i<this.getCantidadCaracteres();i++){
+		
+		switch (caracter){
+			case '$': cantidadOcurrencias=-1; 
+					break;
+			default: {
 				
-				if( cadenaChar[i]==caracter){
+				if (!this.cadenaCaracteres.isEmpty()){
 					
-					cantidadOcurrencias++;
-				}			
-				
+					for (int i=0;i<this.getCantidadCaracteres();i++){
+						
+						if( cadenaChar[i]==caracter){
+							
+							cantidadOcurrencias++;
+						}			
+						
+					}
+					
+					
+				}
 			}
-			
-			
+		
 		}
 				
 		return cantidadOcurrencias;
 		
 	}
 
+	/*
+	@Test
+    public void howManyShouldReturnNegativeWhenCharIsSymbolMoney(){
+        
+        CharCounter counter = new CharCounter("hello world");
+
+        Assert.assertEquals(-1, counter.howMany('$'));
+
+    }*/
+	
 	
 	public int getCantidadCaracteres() {
 		return cantidadCaracteres;

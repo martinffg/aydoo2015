@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class CharCounterTest {
 
-    @Test
+   /* @Test
     public void howManyShouldReturnZeroWhenCharIsNotPresent(){
         
         CharCounter counter = new CharCounter("hello world");
@@ -22,9 +22,8 @@ public class CharCounterTest {
 
         Assert.assertEquals(3, counter.howMany('l'));
 
-    }
+    }*/
 
-    /*
     @Test
     public void howManyShouldReturnNegativeWhenCharIsSymbolMoney(){
         
@@ -35,6 +34,7 @@ public class CharCounterTest {
     }
 
 
+    /*
     @Test
     public void howManyShouldReturnNegativeWhenCharIsSymbolAt(){
         
