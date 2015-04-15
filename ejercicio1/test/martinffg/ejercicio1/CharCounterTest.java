@@ -22,7 +22,7 @@ public class CharCounterTest {
 
         Assert.assertEquals(3, counter.howMany('l'));
 
-    }*/
+    }
 
     @Test
     public void howManyShouldReturnNegativeWhenCharIsSymbolMoney(){
@@ -31,10 +31,10 @@ public class CharCounterTest {
 
         Assert.assertEquals(-1, counter.howMany('$'));
 
-    }
+    }*/
 
 
-    /*
+   
     @Test
     public void howManyShouldReturnNegativeWhenCharIsSymbolAt(){
         
@@ -43,7 +43,7 @@ public class CharCounterTest {
         Assert.assertEquals(-2, counter.howMany('@'));
 
     }
-
+    /*
 	@Test
     public void countAllShouldReturnAnArrayWithAllCharsCount(){
         

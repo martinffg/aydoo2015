@@ -26,6 +26,8 @@ public class CharCounter {
 		switch (caracter){
 			case '$': cantidadOcurrencias=-1; 
 					break;
+			case '@': cantidadOcurrencias=-2; 
+				break;
 			default: {
 				
 				if (!this.cadenaCaracteres.isEmpty()){
@@ -49,17 +51,7 @@ public class CharCounter {
 		
 	}
 
-	/*
-	@Test
-    public void howManyShouldReturnNegativeWhenCharIsSymbolMoney(){
-        
-        CharCounter counter = new CharCounter("hello world");
-
-        Assert.assertEquals(-1, counter.howMany('$'));
-
-    }*/
-	
-	
+		
 	public int getCantidadCaracteres() {
 		return cantidadCaracteres;
 	}
