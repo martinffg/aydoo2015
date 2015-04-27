@@ -32,5 +32,30 @@ public class UsuarioTest {
 	 
  	}
  
+ 	@Test
+ 	public void probarCambiosADatosUsuario(){
+ 		
+ 		Usuario usuario = new Usuario("usuarioPrueba",10000,6,6,TipoAtraccion.AVENTURA);
+ 		
+ 		usuario.setNombre("Pepe");
+ 		usuario.setPassword("Lepuf");
+ 		PosicionGlobal posicionNueva = new PosicionGlobal(20,20,"posicion nueva");
+ 		usuario.setPosicionActual(posicionNueva);
+ 		usuario.setPresupuesto(15000);
+ 		usuario.setTiempoDisponibleVisitas(7);
+ 		usuario.setVelocidadTraslado(8);
+ 		usuario.setTipoAtraccionPreferida(TipoAtraccion.PAISAJE);
+ 		
+ 		Assert.assertEquals("Pepe", usuario.getNombre());
+	 	Assert.assertEquals("Lepuf", usuario.getPassword());
+	 	Assert.assertEquals(20, usuario.getPosicionActual().getCoordenada_X());
+	 	Assert.assertEquals(20, usuario.getPosicionActual().getCoordenada_Y()); 
+	 	Assert.assertEquals("posicion nueva", usuario.getPosicionActual().getEtiquetaPosicionGlobal());
+	 	Assert.assertEquals(15000, usuario.getPresupuesto(),0.01);
+	 	Assert.assertEquals(7, usuario.getTiempoDisponibleVisitas(),0.01);
+	 	Assert.assertEquals(8, usuario.getVelocidadTraslado(),0.01);
+	 	Assert.assertSame(TipoAtraccion.PAISAJE, usuario.getTipoAtraccionPreferida());
+ 		
+ 	}
  
 }
