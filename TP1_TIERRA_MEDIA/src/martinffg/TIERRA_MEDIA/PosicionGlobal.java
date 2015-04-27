@@ -16,6 +16,21 @@ public class PosicionGlobal {
 		
 	}
 	
+	public double getDistanciaPuntoRemoto (PosicionGlobal posicionRemota){
+		
+		double distancia=0.0;
+		
+		int diferenciaEnX = posicionRemota.getCoordenada_X() - this.getCoordenada_X();
+		
+		int diferenciaEnY = posicionRemota.getCoordenada_Y() - this.getCoordenada_Y();
+		
+		double sumaCuadradoDiferencias = Math.pow(diferenciaEnX, 2) + Math.pow(diferenciaEnY, 2);
+		
+		distancia = Math.sqrt(sumaCuadradoDiferencias);
+		
+		return distancia;
+	}
+	
 	public int getCoordenada_X() {
 		return coordenada_X;
 	}
@@ -39,10 +54,5 @@ public class PosicionGlobal {
 	public void setEtiquetaPosicionGlobal(String etiquetaPosicionGlobal) {
 		this.etiquetaPosicionGlobal = etiquetaPosicionGlobal;
 	}
-	
-	
-	
-	
-	
-		
+			
 }
