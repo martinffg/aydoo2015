@@ -1,5 +1,5 @@
 Testsuite: martinffg.TIERRA_MEDIA.AtraccionTest
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,047 sec
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,048 sec
 
 Testcase: crearAtraccion took 0,009 sec
 Testcase: probarConsultaDatosAtraccion took 0 sec

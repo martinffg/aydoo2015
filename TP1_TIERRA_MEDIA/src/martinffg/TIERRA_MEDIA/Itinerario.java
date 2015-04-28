@@ -1,7 +1,6 @@
 package martinffg.TIERRA_MEDIA;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -38,6 +37,20 @@ public class Itinerario {
 		}
 		
 	}
+	
+	public void setAtracciones(List<Atraccion> atracciones) {
+		Atraccion atraccionActual;
+		ListIterator<Atraccion> iterador= atracciones.listIterator();
+		while (iterador.hasNext()){
+			atraccionActual = (Atraccion) iterador.next();
+			if (atraccionActual.getCuposDisponiblesAhora()>0) {
+				this.cantidadAtraccionesIncluidas++;
+				this.costoTotalItinerario+=atraccionActual.getCostoVisita();
+				this.tiempoTotalItinerario+=atraccionActual.getPromedioTiempoNecesarioParaVisitar();
+				this.atracciones.add(atraccionActual);
+			}
+		}
+	}	
 	
 	// todos los getters
 		public String getNombreItinerario() {
