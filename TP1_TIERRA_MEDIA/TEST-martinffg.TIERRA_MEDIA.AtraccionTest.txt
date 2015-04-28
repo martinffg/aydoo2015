@@ -1,0 +1,4 @@
+Testsuite: martinffg.TIERRA_MEDIA.AtraccionTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,027 sec
+
+Testcase: crearAtraccion took 0,006 sec
