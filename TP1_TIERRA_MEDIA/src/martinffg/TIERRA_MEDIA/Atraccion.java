@@ -20,5 +20,54 @@ public class Atraccion {
 		this.tipoDeAtraccion = tipo_atraccion;
 
 	}
+
+	public String getNombreAtraccion() {
+		return nombreAtraccion;
+	}
+
+	public void setNombreAtraccion(String nombreAtraccion) {
+		this.nombreAtraccion = nombreAtraccion;
+	}
+
+	public PosicionGlobal getCoordenadasPosicion() {
+		return coordenadasPosicion;
+	}
+
+	public void setCoordenadasPosicion(PosicionGlobal coordenadasPosicion) {
+		this.coordenadasPosicion = coordenadasPosicion;
+	}
+
+	public double getCostoVisita() {
+		return costoVisita;
+	}
+
+	public void setCostoVisita(double costoVisita) {
+		this.costoVisita = costoVisita;
+	}
+
+	public int getCupoVisitantesDiarios() {
+		return cupoVisitantesDiarios;
+	}
+
+	public void setCupoVisitantesDiarios(int cupoVisitantesDiarios) {
+		this.cupoVisitantesDiarios = cupoVisitantesDiarios;
+	}
+
+	public double getPromedioTiempoNecesarioParaVisitar() {
+		return promedioTiempoNecesarioParaVisitar;
+	}
+
+	public void setPromedioTiempoNecesarioParaVisitar(
+			double promedioTiempoNecesarioParaVisitar) {
+		this.promedioTiempoNecesarioParaVisitar = promedioTiempoNecesarioParaVisitar;
+	}
+
+	public TipoAtraccion getTipoDeAtraccion() {
+		return tipoDeAtraccion;
+	}
+
+	public void setTipoDeAtraccion(TipoAtraccion tipoDeAtraccion) {
+		this.tipoDeAtraccion = tipoDeAtraccion;
+	}
 	
 }
