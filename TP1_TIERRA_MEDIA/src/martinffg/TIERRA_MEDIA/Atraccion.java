@@ -17,6 +17,7 @@ public class Atraccion {
 		this.coordenadasPosicion = coordenadas;
 		this.costoVisita = costo;
 		this.cupoVisitantesDiarios = cupoDiario;
+		this.cuposDisponiblesAhora = cupoDiario;
 		this.promedioTiempoNecesarioParaVisitar = tiempoPromedio;
 		this.tipoDeAtraccion = tipo_atraccion;
 
