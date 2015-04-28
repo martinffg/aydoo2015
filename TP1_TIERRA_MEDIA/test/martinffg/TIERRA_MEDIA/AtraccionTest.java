@@ -13,7 +13,7 @@ public class AtraccionTest {
 	 	// creo atraccion nombre Mordor, en la pos 20,20, con costo 152,20, tiempo prom recorrido 122 de tipo Aventura
 	 	Atraccion atraccion = new Atraccion("Mordor",posicionMordor,152.20,1000,122.0,TipoAtraccion.AVENTURA); 
 	 	
-	 	// valido que se haya creado el usuario
+	 	// valido que se haya creado la atraccion
 	 	Assert.assertNotNull(atraccion);
  
  	}

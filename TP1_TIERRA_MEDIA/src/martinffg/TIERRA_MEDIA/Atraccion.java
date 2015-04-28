@@ -6,6 +6,7 @@ public class Atraccion {
 	private PosicionGlobal coordenadasPosicion;
 	private double costoVisita;
 	private int cupoVisitantesDiarios;
+	private int cuposDisponiblesAhora;
 	private double promedioTiempoNecesarioParaVisitar; // En Horas
 	private TipoAtraccion tipoDeAtraccion;
 	
@@ -68,6 +69,14 @@ public class Atraccion {
 
 	public void setTipoDeAtraccion(TipoAtraccion tipoDeAtraccion) {
 		this.tipoDeAtraccion = tipoDeAtraccion;
+	}
+
+	public int getCuposDisponiblesAhora() {
+		return cuposDisponiblesAhora;
+	}
+
+	public void setCuposDisponiblesAhora(int cuposDisponiblesAhora) {
+		this.cuposDisponiblesAhora = cuposDisponiblesAhora;
 	}
 	
 }
