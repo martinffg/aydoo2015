@@ -8,6 +8,7 @@ public class Usuario {
 	private double tiempoDisponibleVisitas; // En Horas
 	private double velocidadTraslado; // En KM/H
 	private TipoAtraccion tipoAtraccionPreferida;
+	private TipoPromocion tipoPromocionAsignada;
 	private PosicionGlobal posicionActual;
 	
 	public Usuario(String nombre_usuario,double presupuesto,int tiempoDisponible,
@@ -59,6 +60,16 @@ public class Usuario {
 	public void setTipoAtraccionPreferida(TipoAtraccion tipoAtraccionPreferida) {
 		this.tipoAtraccionPreferida = tipoAtraccionPreferida;
 	}
+	
+	
+	public TipoPromocion getTipoPromocionAsignada() {
+		return tipoPromocionAsignada;
+	}
+
+	public void setTipoPromocionAsignada(TipoPromocion tipoPromocionAsignada) {
+		this.tipoPromocionAsignada = tipoPromocionAsignada;
+	}
+
 	public PosicionGlobal getPosicionActual() {
 		return posicionActual;
 	}

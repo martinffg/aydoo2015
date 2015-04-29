@@ -50,7 +50,12 @@ public class Itinerario {
 				this.atracciones.add(atraccionActual);
 			}
 		}
-	}	
+	}
+	
+	public void agregarTiempoViajeAlItinerario(double tiempoViaje) {
+		
+		this.tiempoTotalItinerario+=tiempoViaje;
+	}
 	
 	// todos los getters
 		public String getNombreItinerario() {
