@@ -8,11 +8,11 @@ public class Usuario {
 	private double tiempoDisponibleVisitas; // En Horas
 	private double velocidadTraslado; // En KM/H
 	private TipoAtraccion tipoAtraccionPreferida;
-	private TipoPromocion tipoPromocionAsignada;
+	private Promocion promocionAsignada;
 	private PosicionGlobal posicionActual;
 	
 	public Usuario(String nombre_usuario,double presupuesto,int tiempoDisponible,
-					double velocidad,TipoAtraccion atraccion_pref){
+					double velocidad, Promocion promocionAsignadaVisitante,TipoAtraccion atraccion_pref){
 		
 		this.nombre = nombre_usuario;
 		this.password = "";
@@ -20,7 +20,8 @@ public class Usuario {
 		this.tiempoDisponibleVisitas = tiempoDisponible;
 		this.velocidadTraslado = velocidad;
 		this.tipoAtraccionPreferida = atraccion_pref;
-		this.posicionActual= new PosicionGlobal(0,0,"Origen_coordenadas");
+		this.promocionAsignada = promocionAsignadaVisitante;
+		this.posicionActual = new PosicionGlobal(0,0,"Origen_coordenadas");
 
 	}
 	
@@ -62,12 +63,12 @@ public class Usuario {
 	}
 	
 	
-	public TipoPromocion getTipoPromocionAsignada() {
-		return tipoPromocionAsignada;
+	public Promocion getPromocionAsignada() {
+		return promocionAsignada;
 	}
 
-	public void setTipoPromocionAsignada(TipoPromocion tipoPromocionAsignada) {
-		this.tipoPromocionAsignada = tipoPromocionAsignada;
+	public void setPromocionAsignada(Promocion promocionAsignada) {
+		this.promocionAsignada = promocionAsignada;
 	}
 
 	public PosicionGlobal getPosicionActual() {

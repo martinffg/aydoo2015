@@ -1,6 +1,6 @@
 Testsuite: martinffg.TIERRA_MEDIA.UsuarioTest
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,04 sec
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,031 sec
 
 Testcase: probarConsultaDatosUsuario took 0,006 sec
-Testcase: probarCambiosADatosUsuario took 0,001 sec
+Testcase: probarCambiosADatosUsuario took 0 sec
 Testcase: crearUsuario took 0 sec

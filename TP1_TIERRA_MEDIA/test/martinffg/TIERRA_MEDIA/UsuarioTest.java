@@ -1,5 +1,7 @@
 package martinffg.TIERRA_MEDIA;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -8,8 +10,11 @@ public class UsuarioTest {
  @Test
     public void crearUsuario(){
         
-	 	// creo usuarioPrueba, con 10000 pesos, 6 Hs para recorrer, se mueve a 6 KM/H y prefiere las Aventuras
-	 	Usuario usuario = new Usuario("usuarioPrueba",10000,6,6,TipoAtraccion.AVENTURA); 
+	 	Date fechaHoy = new Date();
+	 	long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
+	 	PromocionPorcentual promocionAsignada = new PromocionPorcentual("Promo Porcentual Prueba",fechaVence,5.0);
+	 
+	 	Usuario usuario = new Usuario("usuarioPrueba",10000,6,6,promocionAsignada,TipoAtraccion.AVENTURA); 
 	 	
 	 	// valido que se haya creado el usuario
 	 	Assert.assertNotNull(usuario);
@@ -18,8 +23,12 @@ public class UsuarioTest {
  
  @Test
  	public void probarConsultaDatosUsuario(){
-	 	
-	 	Usuario usuario = new Usuario("usuarioPrueba",10000,6,6,TipoAtraccion.AVENTURA);
+	 		 
+	 	Date fechaHoy = new Date();
+	 	long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
+	 	PromocionPorcentual promocionAsignada = new PromocionPorcentual("Promo Porcentual Prueba",fechaVence,5.0);
+	 
+	 	Usuario usuario = new Usuario("usuarioPrueba",10000,6,6,promocionAsignada,TipoAtraccion.AVENTURA);
 	 
 	 	// valido que los datos ingresados en el creador por defecto sean correctos
 	 	Assert.assertEquals("usuarioPrueba", usuario.getNombre());
@@ -35,7 +44,11 @@ public class UsuarioTest {
  	@Test
  	public void probarCambiosADatosUsuario(){
  		
- 		Usuario usuario = new Usuario("usuarioPrueba",10000,6,6,TipoAtraccion.AVENTURA);
+ 		Date fechaHoy = new Date();
+	 	long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
+	 	PromocionPorcentual promocionAsignada = new PromocionPorcentual("Promo Porcentual Prueba",fechaVence,5.0);
+ 		
+ 		Usuario usuario = new Usuario("usuarioPrueba",10000,6,6,promocionAsignada,TipoAtraccion.AVENTURA);
  		
  		usuario.setNombre("Pepe");
  		usuario.setPassword("Lepuf");
