@@ -9,6 +9,7 @@ public class Itinerario {
 	private String nombreItinerario;
 	private List<Atraccion> atracciones;
 	private double costoTotalItinerario;
+	private double costoTotalItinerarioConPromocion;
 	private double tiempoTotalItinerario;
 	private int cantidadAtraccionesIncluidas;
 	
@@ -17,6 +18,7 @@ public class Itinerario {
 		this.nombreItinerario=nombre;
 		this.atracciones = new ArrayList<Atraccion>();
 		this.costoTotalItinerario= 0.0;
+		this.costoTotalItinerarioConPromocion=0.0;
 		this.tiempoTotalItinerario= 0.0;
 		this.cantidadAtraccionesIncluidas=0;
 		
@@ -76,6 +78,15 @@ public class Itinerario {
 
 		public int getCantidadAtraccionesIncluidas() {
 			return cantidadAtraccionesIncluidas;
+		}
+
+		public double getCostoTotalItinerarioConPromocion() {
+			return costoTotalItinerarioConPromocion;
+		}
+
+		public void setCostoTotalItinerarioConPromocion(
+				double costoTotalItinerarioConPromocion) {
+			this.costoTotalItinerarioConPromocion = costoTotalItinerarioConPromocion;
 		}
 	
 }

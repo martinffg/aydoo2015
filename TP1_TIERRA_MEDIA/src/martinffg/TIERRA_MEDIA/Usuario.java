@@ -11,7 +11,7 @@ public class Usuario {
 	private Promocion promocionAsignada;
 	private PosicionGlobal posicionActual;
 	
-	public Usuario(String nombre_usuario,double presupuesto,int tiempoDisponible,
+	public Usuario(String nombre_usuario,double presupuesto,double tiempoDisponible,
 					double velocidad, Promocion promocionAsignadaVisitante,TipoAtraccion atraccion_pref){
 		
 		this.nombre = nombre_usuario;
