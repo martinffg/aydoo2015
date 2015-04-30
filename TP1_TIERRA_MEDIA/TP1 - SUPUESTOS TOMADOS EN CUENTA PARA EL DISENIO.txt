@@ -1,0 +1,12 @@
+Supuestos tomados en cuenta para el Diseño del código
+
+* El tiempo se mide en Horas (formato decimal, ejemplo: 4.8 Horas, etc)
+* Las distancias se midem en Kilométros [KM].
+* La velocidad del usuario / visitante se mide en KM/H.
+* El usuario puede comenzar desde cualquier punto (X,Y) siendo X e Y numeros enteros.
+* A cada usuario se le asigna una y sólo una promoción para sí y se aplica el descuento al Generar los Itinerarios posibles.
+* Los itinerarios se eligen teniendo en cuenta 3 criterios distintos:
+a) Atracciones preferidas del usuario (que corresponden a su tipo preferido) luego aquellas que no lo son.
+b) En formato sin orden, es decir, según como hayan sido cargados en el sistema.
+c) En formato incómodo, o que no sigue la preferencia de gusto del usuario, comienza con aquellas no preferidas y luego sugiere.
+Las limitaciones en los números de actividades por cada itinerario responden a las limitaciones de tiempo y costo por parte del visitante y de disponibilidad por parte de la atracción (que tenga cupos disponibles).
