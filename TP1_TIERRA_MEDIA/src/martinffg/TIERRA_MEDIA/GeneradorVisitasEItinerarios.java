@@ -119,13 +119,13 @@ public class GeneradorVisitasEItinerarios {
 		ListIterator<Atraccion> iteradorListaPreferidosLuegoElResto= listaPreferidosLuegoElResto.listIterator();
 		ListIterator<Atraccion> iteradorListaRestoLuegoPreferidos= listaRestoLuegoPreferidos.listIterator();
 		
-		// CREO LOS ITINERARIOS QUE IRAN GUARDANDO LA INFORMACIÓN DE CADA RECORRIDO
+		// CREO LOS ITINERARIOS QUE IRAN GUARDANDO LA INFORMACION DE CADA RECORRIDO
 		Itinerario itinerarioSinOrden = new Itinerario("Itinerario Sin Orden");
 		Itinerario itinerarioPreferidos = new Itinerario("Itinerario Preferidos");
 		Itinerario itinerarioIncomodo = new Itinerario("Itinerario Incomodo");
 		
-		// COMIENZO A ITERAR CADA LISTA Y GUARDANDO LA INFORMACIÓN EN CADA ITINERARIO, 
-		// CORTARÁ SI NO EXCEDE ALGUNA LIMITACION DEL USUARIO O FALTA DE CUPO
+		// COMIENZO A ITERAR CADA LISTA Y GUARDANDO LA INFORMACION EN CADA ITINERARIO, 
+		// CORTARA SI NO EXCEDE ALGUNA LIMITACION DEL USUARIO O FALTA DE CUPO
 		
 		while (iteradorListaSinOrden.hasNext()){
 						 
@@ -146,7 +146,7 @@ public class GeneradorVisitasEItinerarios {
 			
 		}
 		
-		// VUELVO AL USUARIO AL ORIGEN PARA ANALIZAR EL PRÓXIMO ITINERARIO 
+		// VUELVO AL USUARIO AL ORIGEN PARA ANALIZAR EL PROXIMO ITINERARIO 
 		posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
 		tiempoViajeAlaAtraccionActual = 0.0; // En Horas
 		distanciaAlUsuario = 0.0; // En KM/H
@@ -170,7 +170,7 @@ public class GeneradorVisitasEItinerarios {
 			
 		}
 		
-		// VUELVO AL USUARIO AL ORIGEN PARA ANALIZAR EL PRÓXIMO ITINERARIO 
+		// VUELVO AL USUARIO AL ORIGEN PARA ANALIZAR EL PROXIMO ITINERARIO 
 		posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
 		tiempoViajeAlaAtraccionActual = 0.0; // En Horas
 		distanciaAlUsuario = 0.0; // En KM/H
