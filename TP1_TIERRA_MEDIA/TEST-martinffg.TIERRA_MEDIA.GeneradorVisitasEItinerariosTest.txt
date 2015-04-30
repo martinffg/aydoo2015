@@ -1,4 +1,5 @@
 Testsuite: martinffg.TIERRA_MEDIA.GeneradorVisitasEItinerariosTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,056 sec
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,043 sec
 
-Testcase: crearGeneradorVisitasEItinerariosTest took 0,014 sec
+Testcase: getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuarioTEST took 0,014 sec
+Testcase: crearGeneradorVisitasEItinerariosTest took 0 sec

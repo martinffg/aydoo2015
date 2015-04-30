@@ -4,6 +4,7 @@ public class Atraccion {
 	
 	private String nombreAtraccion;
 	private PosicionGlobal coordenadasPosicion;
+	private double distanciaAlPuntoDeConsulta;
 	private double costoVisita;
 	private int cupoVisitantesDiarios;
 	private int cuposDisponiblesAhora;
@@ -15,6 +16,7 @@ public class Atraccion {
 		
 		this.nombreAtraccion = nombre;
 		this.coordenadasPosicion = coordenadas;
+		this.distanciaAlPuntoDeConsulta= 0.0;
 		this.costoVisita = costo;
 		this.cupoVisitantesDiarios = cupoDiario;
 		this.cuposDisponiblesAhora = cupoDiario;
@@ -79,5 +81,13 @@ public class Atraccion {
 	public void setCuposDisponiblesAhora(int cuposDisponiblesAhora) {
 		this.cuposDisponiblesAhora = cuposDisponiblesAhora;
 	}
-	
+
+	public double getDistanciaAlPuntoDeConsulta() {
+		return distanciaAlPuntoDeConsulta;
+	}
+
+	public void setDistanciaAlPuntoDeConsulta(double distanciaAlPuntoDeConsulta) {
+		this.distanciaAlPuntoDeConsulta = distanciaAlPuntoDeConsulta;
+	}
+		
 }
