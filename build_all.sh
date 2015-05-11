@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 set -e
-cd TP1_TIERRA_MEDIA
+cd TP_TIERRA_MEDIA
 ant
 
