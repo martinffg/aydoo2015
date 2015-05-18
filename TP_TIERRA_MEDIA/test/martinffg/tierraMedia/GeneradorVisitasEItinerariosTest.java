@@ -60,7 +60,7 @@ public class GeneradorVisitasEItinerariosTest {
  	}
  
  @Test
-	 public void getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuarioTEST(){
+	public void getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuarioTEST(){
 		 
 	 	// Genero la lista de atracciones para poder correr la prueba
 		 
@@ -110,7 +110,7 @@ public class GeneradorVisitasEItinerariosTest {
 	 	Assert.assertEquals(4, atraccionesSugeridas.size());
 	 	Assert.assertEquals(TipoAtraccion.DEGUSTACION, atraccionActual.getTipoDeAtraccion());
 		 
-	 }
+	}
  
  	@Test
  	public void getListaItinerariosSugeridosTEST(){

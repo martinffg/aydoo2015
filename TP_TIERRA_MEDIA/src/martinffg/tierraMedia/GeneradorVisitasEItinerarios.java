@@ -47,12 +47,14 @@ public class GeneradorVisitasEItinerarios {
 			
 			atraccionActual.setDistanciaAlPuntoDeConsulta(distanciaAlUsuario);
 			
-			if (atraccionActual.getTipoDeAtraccion()==this.getUsuarioVisitante().getTipoAtraccionPreferida()){
-				listaVisitasPreferidas.add(atraccionActual);
-			}  else {
-				listaVisitasNoPreferidas.add(atraccionActual);
-			}
+			if ((atraccionActual.getCuposDisponiblesAhora())>=(this.usuarioVisitante.getCantidadTicketsGrupoFamiliar())){
 			
+				if (atraccionActual.getTipoDeAtraccion()==this.getUsuarioVisitante().getTipoAtraccionPreferida()){
+					listaVisitasPreferidas.add(atraccionActual);
+				}  else {
+					listaVisitasNoPreferidas.add(atraccionActual);
+				}
+			}
 		}
 		
 		// ordeno la lista de visitasPreferidas de menor a mayor distancia al usuario
@@ -95,80 +97,146 @@ public class GeneradorVisitasEItinerarios {
 		
 	}	
 	
-	public List<Itinerario> getListaItinerariosSugeridos() {
+	private Itinerario generarItinerarioSinOrden(){
 		
-		// inicializo variables locales necesarias
 		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
-		
+		int cantidadGrupoFamiliar= this.usuarioVisitante.getCantidadTicketsGrupoFamiliar();
 		double tiempoViajeAlaAtraccionActual = 0.0; // En Horas
 		double distanciaAlUsuario = 0.0; // En KM/H
 		double costoPromoSinOrden = 0.0;
-		double costoPromoPreferidos = 0.0;
-		double costoPromoIncomodos = 0.0;
-		
+		double descuentoGrupoFamiliarSinOrden = 0.0;
 		@SuppressWarnings("unused")
 		Atraccion atraccionActual,atraccionPrevia;
 		
-		// GENERO LAS LISTAS PARA EVALUAR LOS ITINERARIOS PARA EL USUARIO
+		// GENERO LA LISTA
 		List<Atraccion> listaSinOrden = this.getListaAtraccionesDeTierraMedia();
-		List<Atraccion> listaPreferidosLuegoElResto = this.getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuario();
-		List<Atraccion> listaRestoLuegoPreferidos = this.getListaVisitasSugeridasPorDESINTERESYDistanciaRelativaUsuario();
-		
-		// GENERO LOS ITERADORES DE CADA LISTA
 		ListIterator<Atraccion> iteradorListaSinOrden= listaSinOrden.listIterator();
-		ListIterator<Atraccion> iteradorListaPreferidosLuegoElResto= listaPreferidosLuegoElResto.listIterator();
-		ListIterator<Atraccion> iteradorListaRestoLuegoPreferidos= listaRestoLuegoPreferidos.listIterator();
-		
-		// CREO LOS ITINERARIOS QUE IRAN GUARDANDO LA INFORMACION DE CADA RECORRIDO
 		Itinerario itinerarioSinOrden = new Itinerario("Itinerario Sin Orden");
-		Itinerario itinerarioPreferidos = new Itinerario("Itinerario Preferidos");
-		Itinerario itinerarioIncomodo = new Itinerario("Itinerario Incomodo");
 		
-		// COMIENZO A ITERAR CADA LISTA Y GUARDANDO LA INFORMACION EN CADA ITINERARIO, 
-		// CORTARA SI NO EXCEDE ALGUNA LIMITACION DEL USUARIO O FALTA DE CUPO
-		
+		// itero la lista
 		while (iteradorListaSinOrden.hasNext()){
 						 
 			atraccionActual = (Atraccion) iteradorListaSinOrden.next();
 			
-			distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
-			tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
-			
-			if (((this.getUsuarioVisitante().getTiempoDisponibleVisitas()-itinerarioSinOrden.getTiempoTotalItinerario()-atraccionActual.getPromedioTiempoNecesarioParaVisitar()-tiempoViajeAlaAtraccionActual)>=0) 
-					&& ((this.getUsuarioVisitante().getPresupuesto()-itinerarioSinOrden.getCostoTotalItinerario()-atraccionActual.getCostoVisita())>=0)
-					&&(atraccionActual.getCuposDisponiblesAhora()>0)) {			
-				itinerarioSinOrden.agregarAtraccion(atraccionActual);
-				itinerarioSinOrden.agregarTiempoViajeAlItinerario(tiempoViajeAlaAtraccionActual);
-				posicionUsuario = atraccionActual.getCoordenadasPosicion();
+			// primero valido si hay cupo para la compra del usuario si hay la agrego al itinerario y sera atraccionPrevia para la proxima iteracion
+			if ((atraccionActual.getCuposDisponiblesAhora())>=cantidadGrupoFamiliar){
+				
+				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
+				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
+				
+				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+					
+					descuentoGrupoFamiliarSinOrden+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
+					
+				}
+				
+				atraccionActual.setCostoVisita(atraccionActual.getCostoVisita() * cantidadGrupoFamiliar);
+				
+				if (((this.getUsuarioVisitante().getTiempoDisponibleVisitas()-itinerarioSinOrden.getTiempoTotalItinerario()-atraccionActual.getPromedioTiempoNecesarioParaVisitar()-tiempoViajeAlaAtraccionActual)>=0) 
+						&& ((this.getUsuarioVisitante().getPresupuesto()-itinerarioSinOrden.getCostoTotalItinerario()-atraccionActual.getCostoVisita()+descuentoGrupoFamiliarSinOrden)>=0)) {			
+					itinerarioSinOrden.agregarAtraccion(atraccionActual);
+					itinerarioSinOrden.agregarTiempoViajeAlItinerario(tiempoViajeAlaAtraccionActual);
+					posicionUsuario = atraccionActual.getCoordenadasPosicion();
+				}
+				
+				atraccionPrevia = atraccionActual;
 			}
-			
-			atraccionPrevia = atraccionActual;
 			
 		}
 		
-		// VUELVO AL USUARIO AL ORIGEN PARA ANALIZAR EL PROXIMO ITINERARIO 
-		posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
-		tiempoViajeAlaAtraccionActual = 0.0; // En Horas
-		distanciaAlUsuario = 0.0; // En KM/H
+		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
+		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+			costoPromoSinOrden = itinerarioSinOrden.getCostoTotalItinerario()-descuentoGrupoFamiliarSinOrden;
+		} else { 
+			costoPromoSinOrden = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioSinOrden);
+		}
 		
+		itinerarioSinOrden.setCostoTotalItinerarioConPromocion(costoPromoSinOrden);		
+		
+	return itinerarioSinOrden;
+	}
+	
+	private Itinerario generarItinerarioPreferidos(){
+		
+		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
+		int cantidadGrupoFamiliar= this.usuarioVisitante.getCantidadTicketsGrupoFamiliar();
+		
+		double tiempoViajeAlaAtraccionActual = 0.0; // En Horas
+		double distanciaAlUsuario = 0.0; // En KM/H
+		double costoPromoPreferidos = 0.0;
+		double descuentoGrupoFamiliarPreferidos = 0.0;
+		
+		@SuppressWarnings("unused")
+		Atraccion atraccionActual,atraccionPrevia;
+		
+		// GENERO LA LISTA
+		List<Atraccion> listaPreferidosLuegoElResto = this.getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuario();
+		ListIterator<Atraccion> iteradorListaPreferidosLuegoElResto= listaPreferidosLuegoElResto.listIterator();
+		// CREO EL ITINERARIO
+		Itinerario itinerarioPreferidos = new Itinerario("Itinerario Preferidos");
+		
+		// itero la lista
 		while (iteradorListaPreferidosLuegoElResto.hasNext()){
 			 
 			atraccionActual = (Atraccion) iteradorListaPreferidosLuegoElResto.next();
 			
-			distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
-			tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
+			// primero valido si hay cupo para la compra del usuario si hay la agrego al itinerario y sera atraccionPrevia para la proxima iteracion
+			if ((atraccionActual.getCuposDisponiblesAhora())>=cantidadGrupoFamiliar){
 			
-			if (((this.getUsuarioVisitante().getTiempoDisponibleVisitas()-itinerarioPreferidos.getTiempoTotalItinerario()-atraccionActual.getPromedioTiempoNecesarioParaVisitar()-tiempoViajeAlaAtraccionActual)>=0) 
-					&& ((this.getUsuarioVisitante().getPresupuesto()-itinerarioPreferidos.getCostoTotalItinerario()-atraccionActual.getCostoVisita())>=0)
-					&&(atraccionActual.getCuposDisponiblesAhora()>0)) {			
-				itinerarioPreferidos.agregarAtraccion(atraccionActual);
-				itinerarioPreferidos.agregarTiempoViajeAlItinerario(tiempoViajeAlaAtraccionActual);
-				posicionUsuario = atraccionActual.getCoordenadasPosicion();
+				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
+				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
+				
+				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+					
+					descuentoGrupoFamiliarPreferidos+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
+					
+				}
+				
+				atraccionActual.setCostoVisita(atraccionActual.getCostoVisita() * cantidadGrupoFamiliar);			
+				
+				if (((this.getUsuarioVisitante().getTiempoDisponibleVisitas()-itinerarioPreferidos.getTiempoTotalItinerario()-atraccionActual.getPromedioTiempoNecesarioParaVisitar()-tiempoViajeAlaAtraccionActual)>=0) 
+						&& ((this.getUsuarioVisitante().getPresupuesto()-itinerarioPreferidos.getCostoTotalItinerario()-atraccionActual.getCostoVisita()+descuentoGrupoFamiliarPreferidos)>=0)) {			
+					itinerarioPreferidos.agregarAtraccion(atraccionActual);
+					itinerarioPreferidos.agregarTiempoViajeAlItinerario(tiempoViajeAlaAtraccionActual);
+					posicionUsuario = atraccionActual.getCoordenadasPosicion();
+				}
+				
+				atraccionPrevia = atraccionActual;
+			
 			}
 			
-			atraccionPrevia = atraccionActual;
-			
 		}
+		
+		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
+		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+			costoPromoPreferidos = itinerarioPreferidos.getCostoTotalItinerario()-descuentoGrupoFamiliarPreferidos;
+		} else { 
+			costoPromoPreferidos = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioPreferidos);
+		}
+		
+		itinerarioPreferidos.setCostoTotalItinerarioConPromocion(costoPromoPreferidos);		
+		
+	return itinerarioPreferidos;
+	}
+	
+	private Itinerario generarItinerarioIncomodo(){
+		// inicializo variables locales necesarias
+		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
+		int cantidadGrupoFamiliar= this.usuarioVisitante.getCantidadTicketsGrupoFamiliar();
+		
+		double tiempoViajeAlaAtraccionActual = 0.0; // En Horas
+		double distanciaAlUsuario = 0.0; // En KM/H
+		double costoPromoIncomodos = 0.0;
+		double descuentoGrupoFamiliarIncomodos = 0.0;
+		
+		@SuppressWarnings("unused")
+		Atraccion atraccionActual,atraccionPrevia;
+		
+		// GENERO LAS LISTAS 
+		List<Atraccion> listaRestoLuegoPreferidos = this.getListaVisitasSugeridasPorDESINTERESYDistanciaRelativaUsuario();
+		ListIterator<Atraccion> iteradorListaRestoLuegoPreferidos= listaRestoLuegoPreferidos.listIterator();
+		// genero el itinerario
+		Itinerario itinerarioIncomodo = new Itinerario("Itinerario Incomodo");
 		
 		// VUELVO AL USUARIO AL ORIGEN PARA ANALIZAR EL PROXIMO ITINERARIO 
 		posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
@@ -179,39 +247,60 @@ public class GeneradorVisitasEItinerarios {
 			 
 			atraccionActual = (Atraccion) iteradorListaRestoLuegoPreferidos.next();
 			
-			distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
-			tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
+			// primero valido si hay cupo para la compra del usuario si hay la agrego al itinerario y sera atraccionPrevia para la proxima iteracion
+			if ((atraccionActual.getCuposDisponiblesAhora())>=cantidadGrupoFamiliar){
 			
-			if (((this.getUsuarioVisitante().getTiempoDisponibleVisitas()-itinerarioIncomodo.getTiempoTotalItinerario()-atraccionActual.getPromedioTiempoNecesarioParaVisitar()-tiempoViajeAlaAtraccionActual)>=0) 
-					&& ((this.getUsuarioVisitante().getPresupuesto()-itinerarioIncomodo.getCostoTotalItinerario()-atraccionActual.getCostoVisita())>=0)
-					&&(atraccionActual.getCuposDisponiblesAhora()>0)) {			
-				itinerarioIncomodo.agregarAtraccion(atraccionActual);
-				itinerarioIncomodo.agregarTiempoViajeAlItinerario(tiempoViajeAlaAtraccionActual);
-				posicionUsuario = atraccionActual.getCoordenadasPosicion();
+				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
+				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
+				
+				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+					descuentoGrupoFamiliarIncomodos+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
+				}
+				
+				atraccionActual.setCostoVisita(atraccionActual.getCostoVisita() * cantidadGrupoFamiliar);			
+				
+				if (((this.getUsuarioVisitante().getTiempoDisponibleVisitas()-itinerarioIncomodo.getTiempoTotalItinerario()-atraccionActual.getPromedioTiempoNecesarioParaVisitar()-tiempoViajeAlaAtraccionActual)>=0) 
+						&& ((this.getUsuarioVisitante().getPresupuesto()-itinerarioIncomodo.getCostoTotalItinerario()-atraccionActual.getCostoVisita()+descuentoGrupoFamiliarIncomodos)>=0)) {			
+					itinerarioIncomodo.agregarAtraccion(atraccionActual);
+					itinerarioIncomodo.agregarTiempoViajeAlItinerario(tiempoViajeAlaAtraccionActual);
+					posicionUsuario = atraccionActual.getCoordenadasPosicion();
+				}
+				
+				atraccionPrevia = atraccionActual;
 			}
-			
-			atraccionPrevia = atraccionActual;
 			
 		}	
 		
 		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
-		costoPromoSinOrden = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioSinOrden);
-		itinerarioSinOrden.setCostoTotalItinerarioConPromocion(costoPromoSinOrden);
-		costoPromoPreferidos = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioPreferidos);
-		itinerarioPreferidos.setCostoTotalItinerarioConPromocion(costoPromoPreferidos);
-		costoPromoIncomodos = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioIncomodo);
+		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+			costoPromoIncomodos = itinerarioIncomodo.getCostoTotalItinerario()-descuentoGrupoFamiliarIncomodos;
+		} else { 
+			costoPromoIncomodos = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioIncomodo);
+		}
+		
 		itinerarioIncomodo.setCostoTotalItinerarioConPromocion(costoPromoIncomodos);
+			
+	return itinerarioIncomodo;
+	}
+	
+	public List<Itinerario> getListaItinerariosSugeridos() {
+		
+		// CREO LOS ITINERARIOS QUE IRAN GUARDANDO LA INFORMACION DE CADA RECORRIDO
+		Itinerario itinerarioSinOrden = this.generarItinerarioSinOrden();
+		Itinerario itinerarioPreferidos = this.generarItinerarioPreferidos();
+		Itinerario itinerarioIncomodo = this.generarItinerarioIncomodo();
 		
 		// AGREGO LOS ITINERARIOS GENERADOS A LA LISTA DE ITINERARIOS QUE DARE COMO RESULTADO
 		this.listaItinerariosSugeridos.add(itinerarioSinOrden);
 		this.listaItinerariosSugeridos.add(itinerarioPreferidos);
 		this.listaItinerariosSugeridos.add(itinerarioIncomodo);		
 		
-		return this.listaItinerariosSugeridos;
-	}
+	return this.listaItinerariosSugeridos;
+	}	
+	
 
-		public List<Atraccion> getListaAtraccionesDeTierraMedia() {
-		return listaAtraccionesDeTierraMedia;
+	public List<Atraccion> getListaAtraccionesDeTierraMedia() {
+			return listaAtraccionesDeTierraMedia;
 	}
 
 	public Usuario getUsuarioVisitante() {
@@ -241,10 +330,13 @@ public class GeneradorVisitasEItinerarios {
 			
 			atraccionActual.setDistanciaAlPuntoDeConsulta(distanciaAlUsuario);
 			
-			if (atraccionActual.getTipoDeAtraccion()==this.getUsuarioVisitante().getTipoAtraccionPreferida()){
-				listaVisitasPreferidas.add(atraccionActual);
-			}  else {
-				listaVisitasNoPreferidas.add(atraccionActual);
+			if ((atraccionActual.getCuposDisponiblesAhora())>=(this.usuarioVisitante.getCantidadTicketsGrupoFamiliar())){
+			
+				if (atraccionActual.getTipoDeAtraccion()==this.getUsuarioVisitante().getTipoAtraccionPreferida()){
+					listaVisitasPreferidas.add(atraccionActual);
+				}  else {
+					listaVisitasNoPreferidas.add(atraccionActual);
+				}
 			}
 			
 		}
@@ -289,16 +381,16 @@ public class GeneradorVisitasEItinerarios {
 		
 	}
 	
-	public boolean esUsuarioExtranjero(){
+	public boolean esUsuarioExtranjero(List<Atraccion> listaAtraccionesDeTM,Usuario usuarioVisitante){
 		
 		boolean resultadoConsulta=false;
-		PosicionGlobal posicionDomicilioUsuario = this.getUsuarioVisitante().getPosicionDomicilio();
+		PosicionGlobal posicionDomicilioUsuario = usuarioVisitante.getPosicionDomicilio();
 		Atraccion atraccionActual;
 		double distanciaMenorAlUsuario= 0.0;
 		double distanciaActualAlUsuario= 0.0;
 		int contador = 0;
 	 	
-		ListIterator<Atraccion> iteradorVisitas= this.getListaAtraccionesDeTierraMedia().listIterator();
+		ListIterator<Atraccion> iteradorVisitas= listaAtraccionesDeTM.listIterator();
 				
 		while (iteradorVisitas.hasNext()){
 			

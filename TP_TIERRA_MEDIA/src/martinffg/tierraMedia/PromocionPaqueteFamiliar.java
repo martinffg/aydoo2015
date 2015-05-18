@@ -2,11 +2,12 @@ package martinffg.tierraMedia;
 
 import java.util.Date;
 
-public class PromocionExtranjero extends Promocion {
+public class PromocionPaqueteFamiliar extends Promocion {
 	
-	public PromocionExtranjero(String nombre,long fechaVencimiento,double valorDescuento){
-		
-		super(nombre,fechaVencimiento,valorDescuento,TipoPromocion.EXTRANJERO);
+	// el valorDescuento es indiferente en el constructor
+	public PromocionPaqueteFamiliar(String nombre,long fechaVencimiento,double valorDescuento){
+	
+		super(nombre,fechaVencimiento,valorDescuento,TipoPromocion.PAQUETE_FAMILIAR);
 		
 	}
 	
@@ -15,11 +16,9 @@ public class PromocionExtranjero extends Promocion {
 		Date fechaHoy = new Date();
 	 	long fechaHoyTimeStamp = fechaHoy.getTime();
 	 	double descuento=0.0;
-	 	
 	 
 	 	if (fechaHoyTimeStamp<=this.getUltimoDiaVigencia()){
-	 		// al ser extranjero recibe descuento del 50% para todas las atracciones
-	 		descuento= itinerario.getCostoTotalItinerario() * 0.5; 
+	 		descuento= itinerario.getCostoTotalItinerario()-itinerario.getCostoTotalItinerarioConPromocion();
 	 	}
 	 	
 		return descuento;
@@ -33,7 +32,7 @@ public class PromocionExtranjero extends Promocion {
 	 	double costo=0.0;
 	 	
 	 	if (fechaHoyTimeStamp<=this.getUltimoDiaVigencia()){
-	 		costo= itinerario.getCostoTotalItinerario() * (1.0 - 0.5);
+	 		costo= itinerario.getCostoTotalItinerarioConPromocion();
 	 	}		
 	 	
 		return costo;

@@ -1,0 +1,6 @@
+Testsuite: martinffg.tierraMedia.TipoAtraccionTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,031 sec
+
+Testcase: probar3TipoAtraccionTest took 0 sec
+Testcase: probar1TipoAtraccionTest took 0 sec
+Testcase: probar2TipoAtraccionTest took 0 sec
