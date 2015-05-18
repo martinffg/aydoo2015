@@ -2,13 +2,6 @@ package martinffg.tierraMedia;
 
 import java.util.Date;
 
-/*
-Promoción extranjero: si el domicilio del usuario se encuentra a más de 200 km 
-de la atracción más cercana de la tierra media a su domicilio, entonces obtiene 
-una bonificación del 50% en todas las atracciones. Esta promoción no es acumulable 
-con ninguna otra.
-*/
-
 public class PromocionExtranjero extends Promocion {
 	
 	public PromocionExtranjero(String nombre,long fechaVencimiento,double valorDescuento){

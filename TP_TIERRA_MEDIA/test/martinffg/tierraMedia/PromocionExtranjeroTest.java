@@ -1,14 +1,8 @@
 package martinffg.tierraMedia;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import martinffg.tierraMedia.Atraccion;
-import martinffg.tierraMedia.Itinerario;
-import martinffg.tierraMedia.PosicionGlobal;
 import martinffg.tierraMedia.PromocionExtranjero;
-import martinffg.tierraMedia.TipoAtraccion;
 import martinffg.tierraMedia.TipoPromocion;
 
 import org.junit.Test;
