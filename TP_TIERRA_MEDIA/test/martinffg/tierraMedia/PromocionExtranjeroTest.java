@@ -33,13 +33,33 @@ public class PromocionExtranjeroTest {
 		
 		 Itinerario itinerario = this.generarItinerarioDePrueba();
 		
-		 Date fechaHoy = new Date();
-		 long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
-		 PromocionExtranjero promocion = new PromocionExtranjero("Promo Extranjero Prueba",fechaVence,50.0);
+		 PromocionExtranjero promocion = this.generarPromocionExtranjeroDePrueba();
 		 
 		 double descuentoObtenido = promocion.calcularDescuentoPromocionalAlItinerario(itinerario);
 		 
 		 Assert.assertEquals(200.0,descuentoObtenido,0.01);
+	}
+	
+	@Test
+	public void probarTotalConDescuentoPorcentualAItinerario(){
+		
+		 Itinerario itinerario = this.generarItinerarioDePrueba();
+		
+		 PromocionExtranjero promocion = this.generarPromocionExtranjeroDePrueba();
+		 
+		 double pagoConDescuento = promocion.calcularCostoPromocionalDelItinerario(itinerario);
+		 
+		 Assert.assertEquals(200.0,pagoConDescuento,0.01);
+	}
+	
+	
+	// METODOS PRIVADOS DE LA CLASE DE PRUEBAS
+	private PromocionExtranjero generarPromocionExtranjeroDePrueba(){
+		
+		Date fechaHoy = new Date();
+		long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
+		
+		return (new PromocionExtranjero("Promo Extranjero Prueba",fechaVence,50.0));
 	}
 	
 	private Itinerario generarItinerarioDePrueba() {
