@@ -3,7 +3,7 @@ Supuestos tomados en cuenta para el Diseño del código
 * El tiempo se mide en Horas (formato decimal, ejemplo: 4.8 Horas, etc)
 * Las distancias se midem en Kilométros [KM].
 * La velocidad del usuario / visitante se mide en KM/H.
-* El usuario puede comenzar desde cualquier punto (X,Y) siendo X e Y numeros enteros.
+*  El usuario puede comenzar desde cualquier punto (X,Y) siendo X e Y numeros enteros, por definición arranca en el (0,0) salvo especificación contraria posterior al momento de la creación.
 * A cada usuario se le asigna una y sólo una promoción para sí y se aplica el descuento al Generar los Itinerarios posibles.
 * Los itinerarios se eligen teniendo en cuenta 3 criterios distintos:
 a) Atracciones preferidas del usuario (que corresponden a su tipo preferido) luego aquellas que no lo son.

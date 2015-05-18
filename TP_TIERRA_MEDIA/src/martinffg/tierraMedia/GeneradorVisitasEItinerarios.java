@@ -289,5 +289,35 @@ public class GeneradorVisitasEItinerarios {
 		
 	}
 	
+	public boolean esUsuarioExtranjero(){
+		
+		boolean resultadoConsulta=false;
+		PosicionGlobal posicionDomicilioUsuario = this.getUsuarioVisitante().getPosicionDomicilio();
+		Atraccion atraccionActual;
+		double distanciaMenorAlUsuario= 0.0;
+		double distanciaActualAlUsuario= 0.0;
+		int contador = 0;
+	 	
+		ListIterator<Atraccion> iteradorVisitas= this.getListaAtraccionesDeTierraMedia().listIterator();
+				
+		while (iteradorVisitas.hasNext()){
+			
+			atraccionActual = (Atraccion) iteradorVisitas.next();
+			
+			distanciaActualAlUsuario = posicionDomicilioUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
+			
+			if ((distanciaActualAlUsuario<distanciaMenorAlUsuario) || (contador==0)) {
+				distanciaMenorAlUsuario = distanciaActualAlUsuario;
+			}
+			contador++;
+		}
+		
+		if (distanciaMenorAlUsuario>200.0) {
+			resultadoConsulta = true;
+		}
+		
+		return resultadoConsulta;
+	}
+	
 
 }

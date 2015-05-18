@@ -10,6 +10,7 @@ public class Usuario {
 	private TipoAtraccion tipoAtraccionPreferida;
 	private Promocion promocionAsignada;
 	private PosicionGlobal posicionActual;
+	private PosicionGlobal posicionDomicilio;
 	
 	public Usuario(String nombre_usuario,double presupuesto,double tiempoDisponible,
 					double velocidad, Promocion promocionAsignadaVisitante,TipoAtraccion atraccion_pref){
@@ -22,6 +23,7 @@ public class Usuario {
 		this.tipoAtraccionPreferida = atraccion_pref;
 		this.promocionAsignada = promocionAsignadaVisitante;
 		this.posicionActual = new PosicionGlobal(0,0,"Origen_coordenadas");
+		this.posicionDomicilio = new PosicionGlobal(0,0,"Origen_coordenadas");
 
 	}
 	
@@ -76,6 +78,14 @@ public class Usuario {
 	}
 	public void setPosicionActual(PosicionGlobal posicionActual) {
 		this.posicionActual = posicionActual;
+	}
+
+	public PosicionGlobal getPosicionDomicilio() {
+		return posicionDomicilio;
+	}
+
+	public void setPosicionDomicilio(PosicionGlobal posicionDomicilio) {
+		this.posicionDomicilio = posicionDomicilio;
 	}
 
 }

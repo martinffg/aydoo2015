@@ -84,6 +84,7 @@ public class Itinerario {
 			return costoTotalItinerarioConPromocion;
 		}
 
+	// setters
 		public void setCostoTotalItinerarioConPromocion(
 				double costoTotalItinerarioConPromocion) {
 			this.costoTotalItinerarioConPromocion = costoTotalItinerarioConPromocion;
