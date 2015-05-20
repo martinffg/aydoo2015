@@ -1,0 +1,6 @@
+Testsuite: martinffg.tierraMedia.PromocionPaqueteFamiliarTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,031 sec
+
+Testcase: probarDescuentoPaqueteFamiliarAItinerario took 0 sec
+Testcase: crearPromocionTest took 0 sec
+Testcase: probarTotalConDescuentoPorcentualAItinerario took 0 sec

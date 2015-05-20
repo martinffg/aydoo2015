@@ -3,35 +3,36 @@ package martinffg.tierraMedia;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
-import java.util.List;
 import java.util.ListIterator;
 
 public class GeneradorVisitasEItinerarios {
 	
-	private List<Atraccion> listaAtraccionesDeTierraMedia;
+	private ArrayList<Atraccion> listaAtraccionesDeTierraMedia;
 	private Usuario usuarioVisitante; 
 	
-	//private List<Atraccion> listaVisitasSugeridasPorInteresYDistanciaRelativaUsuario; 
-	private List<Itinerario> listaItinerariosSugeridos;
+	//private ArrayList<Atraccion> listaVisitasSugeridasPorInteresYDistanciaRelativaUsuario; 
+	private ArrayList<Itinerario> listaItinerariosSugeridos;
 	
-	public GeneradorVisitasEItinerarios(List<Atraccion> listaAtracciones,Usuario visitante){
+	public GeneradorVisitasEItinerarios(ArrayList<Atraccion> listaAtracciones,Usuario visitante){
 		
 		this.listaAtraccionesDeTierraMedia = listaAtracciones;
 		
 		this.usuarioVisitante = visitante;
 		
 		this.listaItinerariosSugeridos = new ArrayList<Itinerario>();
+		
+		this.setListaItinerariosSugeridos(listaAtracciones,visitante);
 			
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<Atraccion> getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuario () {
+	public ArrayList<Atraccion> getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuario () {
 		
 		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
 			
-		List<Atraccion> listaVisitasSugeridas = new ArrayList<Atraccion>();
-		List<Atraccion> listaVisitasPreferidas = new ArrayList<Atraccion>();
-		List<Atraccion> listaVisitasNoPreferidas = new ArrayList<Atraccion>();
+		ArrayList<Atraccion> listaVisitasSugeridas = new ArrayList<Atraccion>();
+		ArrayList<Atraccion> listaVisitasPreferidas = new ArrayList<Atraccion>();
+		ArrayList<Atraccion> listaVisitasNoPreferidas = new ArrayList<Atraccion>();
 		
 		Atraccion atraccionActual;
 		
@@ -97,10 +98,10 @@ public class GeneradorVisitasEItinerarios {
 		
 	}	
 	
-	private Itinerario generarItinerarioSinOrden(){
+	private Itinerario generarItinerarioSinOrden(ArrayList<Atraccion> listaAtracciones,Usuario visitante){
 		
-		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
-		int cantidadGrupoFamiliar= this.usuarioVisitante.getCantidadTicketsGrupoFamiliar();
+		PosicionGlobal posicionUsuario = visitante.getPosicionActual();
+		int cantidadGrupoFamiliar= visitante.getCantidadTicketsGrupoFamiliar();
 		double tiempoViajeAlaAtraccionActual = 0.0; // En Horas
 		double distanciaAlUsuario = 0.0; // En KM/H
 		double costoPromoSinOrden = 0.0;
@@ -109,7 +110,7 @@ public class GeneradorVisitasEItinerarios {
 		Atraccion atraccionActual,atraccionPrevia;
 		
 		// GENERO LA LISTA
-		List<Atraccion> listaSinOrden = this.getListaAtraccionesDeTierraMedia();
+		ArrayList<Atraccion> listaSinOrden = listaAtracciones;
 		ListIterator<Atraccion> iteradorListaSinOrden= listaSinOrden.listIterator();
 		Itinerario itinerarioSinOrden = new Itinerario("Itinerario Sin Orden");
 		
@@ -122,9 +123,9 @@ public class GeneradorVisitasEItinerarios {
 			if ((atraccionActual.getCuposDisponiblesAhora())>=cantidadGrupoFamiliar){
 				
 				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
-				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
+				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/visitante.getVelocidadTraslado();
 				
-				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+				if ((cantidadGrupoFamiliar>=4)&&(visitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
 					
 					descuentoGrupoFamiliarSinOrden+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
 					
@@ -132,8 +133,8 @@ public class GeneradorVisitasEItinerarios {
 				
 				atraccionActual.setCostoVisita(atraccionActual.getCostoVisita() * cantidadGrupoFamiliar);
 				
-				if (((this.getUsuarioVisitante().getTiempoDisponibleVisitas()-itinerarioSinOrden.getTiempoTotalItinerario()-atraccionActual.getPromedioTiempoNecesarioParaVisitar()-tiempoViajeAlaAtraccionActual)>=0) 
-						&& ((this.getUsuarioVisitante().getPresupuesto()-itinerarioSinOrden.getCostoTotalItinerario()-atraccionActual.getCostoVisita()+descuentoGrupoFamiliarSinOrden)>=0)) {			
+				if (((visitante.getTiempoDisponibleVisitas()-itinerarioSinOrden.getTiempoTotalItinerario()-atraccionActual.getPromedioTiempoNecesarioParaVisitar()-tiempoViajeAlaAtraccionActual)>=0) 
+						&& ((visitante.getPresupuesto()-itinerarioSinOrden.getCostoTotalItinerario()-atraccionActual.getCostoVisita()+descuentoGrupoFamiliarSinOrden)>=0)) {			
 					itinerarioSinOrden.agregarAtraccion(atraccionActual);
 					itinerarioSinOrden.agregarTiempoViajeAlItinerario(tiempoViajeAlaAtraccionActual);
 					posicionUsuario = atraccionActual.getCoordenadasPosicion();
@@ -145,10 +146,10 @@ public class GeneradorVisitasEItinerarios {
 		}
 		
 		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
-		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+		if ((cantidadGrupoFamiliar>=4)&&(visitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
 			costoPromoSinOrden = itinerarioSinOrden.getCostoTotalItinerario()-descuentoGrupoFamiliarSinOrden;
 		} else { 
-			costoPromoSinOrden = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioSinOrden);
+			costoPromoSinOrden = visitante.getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioSinOrden);
 		}
 		
 		itinerarioSinOrden.setCostoTotalItinerarioConPromocion(costoPromoSinOrden);		
@@ -156,7 +157,7 @@ public class GeneradorVisitasEItinerarios {
 	return itinerarioSinOrden;
 	}
 	
-	private Itinerario generarItinerarioPreferidos(){
+	private Itinerario generarItinerarioPreferidos(ArrayList<Atraccion> listaAtracciones,Usuario visitante){
 		
 		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
 		int cantidadGrupoFamiliar= this.usuarioVisitante.getCantidadTicketsGrupoFamiliar();
@@ -170,7 +171,7 @@ public class GeneradorVisitasEItinerarios {
 		Atraccion atraccionActual,atraccionPrevia;
 		
 		// GENERO LA LISTA
-		List<Atraccion> listaPreferidosLuegoElResto = this.getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuario();
+		ArrayList<Atraccion> listaPreferidosLuegoElResto = this.getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuario();
 		ListIterator<Atraccion> iteradorListaPreferidosLuegoElResto= listaPreferidosLuegoElResto.listIterator();
 		// CREO EL ITINERARIO
 		Itinerario itinerarioPreferidos = new Itinerario("Itinerario Preferidos");
@@ -219,7 +220,7 @@ public class GeneradorVisitasEItinerarios {
 	return itinerarioPreferidos;
 	}
 	
-	private Itinerario generarItinerarioIncomodo(){
+	private Itinerario generarItinerarioIncomodo(ArrayList<Atraccion> listaAtracciones,Usuario visitante){
 		// inicializo variables locales necesarias
 		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
 		int cantidadGrupoFamiliar= this.usuarioVisitante.getCantidadTicketsGrupoFamiliar();
@@ -233,7 +234,7 @@ public class GeneradorVisitasEItinerarios {
 		Atraccion atraccionActual,atraccionPrevia;
 		
 		// GENERO LAS LISTAS 
-		List<Atraccion> listaRestoLuegoPreferidos = this.getListaVisitasSugeridasPorDESINTERESYDistanciaRelativaUsuario();
+		ArrayList<Atraccion> listaRestoLuegoPreferidos = this.getListaVisitasSugeridasPorDESINTERESYDistanciaRelativaUsuario();
 		ListIterator<Atraccion> iteradorListaRestoLuegoPreferidos= listaRestoLuegoPreferidos.listIterator();
 		// genero el itinerario
 		Itinerario itinerarioIncomodo = new Itinerario("Itinerario Incomodo");
@@ -283,38 +284,44 @@ public class GeneradorVisitasEItinerarios {
 	return itinerarioIncomodo;
 	}
 	
-	public List<Itinerario> getListaItinerariosSugeridos() {
+	private void setListaItinerariosSugeridos(ArrayList<Atraccion> listaAtracciones,Usuario visitante) {
 		
 		// CREO LOS ITINERARIOS QUE IRAN GUARDANDO LA INFORMACION DE CADA RECORRIDO
-		Itinerario itinerarioSinOrden = this.generarItinerarioSinOrden();
-		Itinerario itinerarioPreferidos = this.generarItinerarioPreferidos();
-		Itinerario itinerarioIncomodo = this.generarItinerarioIncomodo();
+		Itinerario itinerarioSinOrden = this.generarItinerarioSinOrden(listaAtracciones,visitante);
+		Itinerario itinerarioPreferidos = this.generarItinerarioPreferidos(listaAtracciones,visitante);
+		Itinerario itinerarioIncomodo = this.generarItinerarioIncomodo(listaAtracciones,visitante);
 		
 		// AGREGO LOS ITINERARIOS GENERADOS A LA LISTA DE ITINERARIOS QUE DARE COMO RESULTADO
-		this.listaItinerariosSugeridos.add(itinerarioSinOrden);
-		this.listaItinerariosSugeridos.add(itinerarioPreferidos);
-		this.listaItinerariosSugeridos.add(itinerarioIncomodo);		
+		ArrayList<Itinerario> listaIt = new ArrayList<Itinerario>();
 		
-	return this.listaItinerariosSugeridos;
+		listaIt.add(itinerarioSinOrden);
+		listaIt.add(itinerarioPreferidos);
+		listaIt.add(itinerarioIncomodo);
+		
+		this.listaItinerariosSugeridos.addAll(listaIt);
+		
 	}	
 	
+	public ArrayList<Itinerario> getListaItinerariosSugeridos() {
+		return listaItinerariosSugeridos;
+	}
 
-	public List<Atraccion> getListaAtraccionesDeTierraMedia() {
+	public ArrayList<Atraccion> getListaAtraccionesDeTierraMedia() {
 			return listaAtraccionesDeTierraMedia;
 	}
 
 	public Usuario getUsuarioVisitante() {
 		return usuarioVisitante;
 	}
-	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private List<Atraccion> getListaVisitasSugeridasPorDESINTERESYDistanciaRelativaUsuario() {
+		
+@SuppressWarnings({ "unchecked", "rawtypes" })
+private ArrayList<Atraccion> getListaVisitasSugeridasPorDESINTERESYDistanciaRelativaUsuario() {
 		
 		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
 			
-		List<Atraccion> listaVisitasSugeridas = new ArrayList<Atraccion>();
-		List<Atraccion> listaVisitasPreferidas = new ArrayList<Atraccion>();
-		List<Atraccion> listaVisitasNoPreferidas = new ArrayList<Atraccion>();
+		ArrayList<Atraccion> listaVisitasSugeridas = new ArrayList<Atraccion>();
+		ArrayList<Atraccion> listaVisitasPreferidas = new ArrayList<Atraccion>();
+		ArrayList<Atraccion> listaVisitasNoPreferidas = new ArrayList<Atraccion>();
 		
 		Atraccion atraccionActual;
 		
@@ -381,7 +388,7 @@ public class GeneradorVisitasEItinerarios {
 		
 	}
 	
-	public boolean esUsuarioExtranjero(List<Atraccion> listaAtraccionesDeTM,Usuario usuarioVisitante){
+	public boolean esUsuarioExtranjero(ArrayList<Atraccion> listaAtraccionesDeTM,Usuario usuarioVisitante){
 		
 		boolean resultadoConsulta=false;
 		PosicionGlobal posicionDomicilioUsuario = usuarioVisitante.getPosicionDomicilio();

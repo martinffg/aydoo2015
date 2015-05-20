@@ -1,8 +1,6 @@
 package martinffg.tierraMedia;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import martinffg.tierraMedia.Atraccion;
 import martinffg.tierraMedia.Itinerario;
 import martinffg.tierraMedia.PosicionGlobal;
@@ -59,7 +57,7 @@ public class ItinerarioTest {
 		 Atraccion atraccion3 = new Atraccion("Gondor",posicionGondor,200.00,500,100.0,TipoAtraccion.PAISAJE);
 		 
 		 // ahora genero la lista de atracciones
-		 List<Atraccion> atracciones = new ArrayList<Atraccion>();
+		 ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
 		 
 		 atracciones.add(atraccion1);
 		 atracciones.add(atraccion2);

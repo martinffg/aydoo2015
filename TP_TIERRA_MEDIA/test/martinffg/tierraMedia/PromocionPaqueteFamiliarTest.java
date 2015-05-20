@@ -2,7 +2,7 @@ package martinffg.tierraMedia;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.ListIterator;
 
 import martinffg.tierraMedia.PromocionPaqueteFamiliar;
 import martinffg.tierraMedia.TipoPromocion;
@@ -28,28 +28,74 @@ public class PromocionPaqueteFamiliarTest {
 	 	
  	}
 	
-	/*@Test
+	@Test
 	public void probarDescuentoPaqueteFamiliarAItinerario(){
-		
-		 Itinerario itinerario = this.generarItinerarioDePrueba();
-		
-		 PromocionPaqueteFamiliar promocion = this.generarPromocionPaqueteFamiliarDePrueba();
 		 
-		 double descuentoObtenido = promocion.calcularDescuentoPromocionalAlItinerario(itinerario);
+		double descuentoObtenido=0.0;
+		
+		Itinerario itinerario=null;
 		 
-		 Assert.assertEquals(400.0,descuentoObtenido,0.01);
+		ArrayList<Atraccion> atracciones = generarAtraccionesDePrueba();
+		 
+		PromocionPaqueteFamiliar promocion = generarPromocionPaqueteFamiliarDePrueba();
+		 
+		Usuario usuario = new Usuario("usuarioPrueba",10000000,12,12,promocion,TipoAtraccion.AVENTURA); 
+		 
+		usuario.setCantidadTicketsGrupoFamiliar(4);
+		 
+		GeneradorVisitasEItinerarios generador = new GeneradorVisitasEItinerarios(atracciones,usuario);
+		
+		ArrayList<Itinerario> itinerariosSugeridos = generador.getListaItinerariosSugeridos();
+		 
+		ListIterator<Itinerario> iterador = itinerariosSugeridos.listIterator();
+		 
+		if (iterador.hasNext()) {
+			
+			itinerario=(Itinerario)iterador.next();
+		 
+			descuentoObtenido = promocion.calcularDescuentoPromocionalAlItinerario(itinerario);
+			 
+		}
+		
+		Assert.assertEquals(3,itinerariosSugeridos.size());
+		Assert.assertEquals(4,usuario.getCantidadTicketsGrupoFamiliar());
+		Assert.assertEquals(4,itinerario.getAtracciones().size());
+		Assert.assertEquals(200.0,descuentoObtenido,0.01);
 	}
 	
 	@Test
 	public void probarTotalConDescuentoPorcentualAItinerario(){
 		
-		 Itinerario itinerario = this.generarItinerarioDePrueba();
+		 double pagoConDescuento=0.0;
 		
-		 PromocionPaqueteFamiliar promocion = this.generarPromocionPaqueteFamiliarDePrueba();
+		Itinerario itinerario=null;
 		 
-		 double pagoConDescuento = promocion.calcularCostoPromocionalDelItinerario(itinerario);
+		ArrayList<Atraccion> atracciones = generarAtraccionesDePrueba();
 		 
-		 Assert.assertEquals(0.0,pagoConDescuento,0.01);
+		PromocionPaqueteFamiliar promocion = generarPromocionPaqueteFamiliarDePrueba();
+		 
+		Usuario usuario = new Usuario("usuarioPrueba",10000000,12,12,promocion,TipoAtraccion.AVENTURA); 
+		 
+		usuario.setCantidadTicketsGrupoFamiliar(4);
+		 
+		GeneradorVisitasEItinerarios generador = new GeneradorVisitasEItinerarios(atracciones,usuario);
+		
+		ArrayList<Itinerario> itinerariosSugeridos = generador.getListaItinerariosSugeridos();
+		 
+		ListIterator<Itinerario> iterador = itinerariosSugeridos.listIterator();
+		 
+		if (iterador.hasNext()) {
+			
+			itinerario=(Itinerario)iterador.next();
+		 
+			pagoConDescuento = promocion.calcularCostoPromocionalDelItinerario(itinerario);
+			 
+		}
+		
+		Assert.assertEquals(3,itinerariosSugeridos.size());
+		Assert.assertEquals(4,usuario.getCantidadTicketsGrupoFamiliar());
+		Assert.assertEquals(4,itinerario.getAtracciones().size());
+		Assert.assertEquals(1800.0,pagoConDescuento,0.01);
 	}
 	
 	
@@ -62,31 +108,31 @@ public class PromocionPaqueteFamiliarTest {
 		return (new PromocionPaqueteFamiliar("Promo Paquete Familiar Prueba",fechaVence,0.0));
 	}
 	
-	private Itinerario generarItinerarioDePrueba() {
+	private ArrayList<Atraccion> generarAtraccionesDePrueba() {
 		
-		 PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
-		 PosicionGlobal posicionAldea = new PosicionGlobal(20,20,"Posicion Aldea");
-		 PosicionGlobal posicionGondor = new PosicionGlobal(30,30,"Posicion Gondor");
-	     
-		 // creo las distintas atracciones
-		 Atraccion atraccion1 = new Atraccion("Mordor",posicionMordor,152.20,1000,122.0,TipoAtraccion.AVENTURA);
-		 Atraccion atraccion2 = new Atraccion("Aldea",posicionAldea,47.80,1500,78.0,TipoAtraccion.DEGUSTACION);
-		 Atraccion atraccion3 = new Atraccion("Gondor",posicionGondor,200.00,500,100.0,TipoAtraccion.PAISAJE);
+		// Genero la lista de atracciones para poder correr la prueba
+				 PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
+				 PosicionGlobal posicionAldea = new PosicionGlobal(20,20,"Posicion Aldea");
+				 PosicionGlobal posicionGondor = new PosicionGlobal(30,30,"Posicion Gondor");
+				 PosicionGlobal posicionPancheria = new PosicionGlobal(5,5,"Posicion Pancheria");
+			     
+				 // creo las distintas atracciones
+				 Atraccion atraccion1 = new Atraccion("Mordor",posicionMordor,152.20,1000,2.0,TipoAtraccion.AVENTURA);
+				 Atraccion atraccion2 = new Atraccion("Aldea",posicionAldea,47.80,1500,1.0,TipoAtraccion.DEGUSTACION);
+				 Atraccion atraccion3 = new Atraccion("Gondor",posicionGondor,200.00,500,1.0,TipoAtraccion.PAISAJE);
+				 Atraccion atraccion4 = new Atraccion("Pancheria",posicionPancheria,100.00,500,1.0,TipoAtraccion.DEGUSTACION);
+				 
+				 // ahora genero la lista de atracciones
+				 ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
+				 
+				 // por ultimo agrego las atracciones a la lista de atraciones.
+				 atracciones.add(atraccion1);
+				 atracciones.add(atraccion2);
+				 atracciones.add(atraccion3);
+				 atracciones.add(atraccion4);
 		 
-		 // ahora genero la lista de atracciones
-		 List<Atraccion> atracciones = new ArrayList<Atraccion>();
-		 
-		 atracciones.add(atraccion1);
-		 atracciones.add(atraccion2);
-		 atracciones.add(atraccion3);
-		 
-		 // armo el itinerario de prueba
-		 Itinerario itinerario = new Itinerario("Itinerario de prueba");
-		 
-		 itinerario.setAtracciones(atracciones);
-		 
-		 return itinerario;
+		 return atracciones;
 		
 	}
-	*/  	 
+	 	 
 }

@@ -1,13 +1,12 @@
 package martinffg.tierraMedia;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
 
 public class Itinerario {
 	
 	private String nombreItinerario;
-	private List<Atraccion> atracciones;
+	private ArrayList<Atraccion> atracciones;
 	private double costoTotalItinerario;
 	private double costoTotalItinerarioConPromocion;
 	private double tiempoTotalItinerario;
@@ -40,7 +39,7 @@ public class Itinerario {
 		
 	}
 	
-	public void setAtracciones(List<Atraccion> atracciones) {
+	public void setAtracciones(ArrayList<Atraccion> atracciones) {
 		Atraccion atraccionActual;
 		ListIterator<Atraccion> iterador= atracciones.listIterator();
 		while (iterador.hasNext()){
@@ -64,7 +63,7 @@ public class Itinerario {
 			return nombreItinerario;
 		}
 		
-		public List<Atraccion> getAtracciones() {
+		public ArrayList<Atraccion> getAtracciones() {
 			return atracciones;
 		}
 		
