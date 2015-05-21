@@ -19,7 +19,7 @@ public class PromocionPaqueteFamiliarTest {
 	 	long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
 	 	PromocionPaqueteFamiliar promocion = new PromocionPaqueteFamiliar("Promo Paquete Familiar Prueba",fechaVence,0.0); 
 	 	
-	 	// valido que se haya creado el promocion
+	 	// valido que se haya creado el promocion con los datos requeridos
 	 	Assert.assertNotNull(promocion);
 	 	Assert.assertEquals("Promo Paquete Familiar Prueba", promocion.getNombrePromocion());
 	 	Assert.assertEquals(fechaVence, promocion.getUltimoDiaVigencia());
@@ -29,7 +29,7 @@ public class PromocionPaqueteFamiliarTest {
  	}
 	
 	@Test
-	public void probarDescuentoPaqueteFamiliarAItinerario(){
+	public void calcularDescuentoPaqueteFamiliarAItinerarioTest(){
 		 
 		double descuentoObtenido=0.0;
 		
@@ -56,7 +56,7 @@ public class PromocionPaqueteFamiliarTest {
 			descuentoObtenido = promocion.calcularDescuentoPromocionalAlItinerario(itinerario);
 			 
 		}
-		
+		// valido el resultado obtenido
 		Assert.assertEquals(3,itinerariosSugeridos.size());
 		Assert.assertEquals(4,usuario.getCantidadTicketsGrupoFamiliar());
 		Assert.assertEquals(4,itinerario.getAtracciones().size());
@@ -64,7 +64,7 @@ public class PromocionPaqueteFamiliarTest {
 	}
 	
 	@Test
-	public void probarTotalConDescuentoPorcentualAItinerario(){
+	public void calcularTotalConDescuentoPorcentualAItinerarioTest(){
 		
 		 double pagoConDescuento=0.0;
 		
@@ -91,7 +91,7 @@ public class PromocionPaqueteFamiliarTest {
 			pagoConDescuento = promocion.calcularCostoPromocionalDelItinerario(itinerario);
 			 
 		}
-		
+		// valido el resultado obtenido
 		Assert.assertEquals(3,itinerariosSugeridos.size());
 		Assert.assertEquals(4,usuario.getCantidadTicketsGrupoFamiliar());
 		Assert.assertEquals(4,itinerario.getAtracciones().size());

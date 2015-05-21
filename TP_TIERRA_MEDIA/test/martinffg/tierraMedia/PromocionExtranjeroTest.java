@@ -2,6 +2,7 @@ package martinffg.tierraMedia;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 import martinffg.tierraMedia.PromocionExtranjero;
 import martinffg.tierraMedia.TipoPromocion;
 
@@ -17,7 +18,7 @@ public class PromocionExtranjeroTest {
 	 	long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
 	 	PromocionExtranjero promocion = new PromocionExtranjero("Promo Extranjero Prueba",fechaVence,50.0); 
 	 	
-	 	// valido que se haya creado el promocion
+	 	// valido que se haya creado el promocion con los datos requeridos
 	 	Assert.assertNotNull(promocion);
 	 	Assert.assertEquals("Promo Extranjero Prueba", promocion.getNombrePromocion());
 	 	Assert.assertEquals(fechaVence, promocion.getUltimoDiaVigencia());
@@ -27,27 +28,45 @@ public class PromocionExtranjeroTest {
  	}
 	
 	@Test
-	public void probarDescuentoExtranjeroAItinerario(){
+	public void calcularDescuentoExtranjeroAItinerarioTest(){
 		
 		 Itinerario itinerario = this.generarItinerarioDePrueba();
 		
 		 PromocionExtranjero promocion = this.generarPromocionExtranjeroDePrueba();
 		 
 		 double descuentoObtenido = promocion.calcularDescuentoPromocionalAlItinerario(itinerario);
-		 
+		 // valido el resultado obtenido
 		 Assert.assertEquals(200.0,descuentoObtenido,0.01);
 	}
 	
 	@Test
-	public void probarTotalConDescuentoPorcentualAItinerario(){
+	public void calcularTotalConDescuentoPorcentualAItinerarioTest(){
 		
 		 Itinerario itinerario = this.generarItinerarioDePrueba();
 		
 		 PromocionExtranjero promocion = this.generarPromocionExtranjeroDePrueba();
 		 
 		 double pagoConDescuento = promocion.calcularCostoPromocionalDelItinerario(itinerario);
-		 
+		// valido el resultado obtenido
 		 Assert.assertEquals(200.0,pagoConDescuento,0.01);
+	}
+	
+	@Test
+	public void calcularCostoConDescuentoAUsuarioExtranjeroValidadoTest(){
+		
+		Itinerario itinerario = this.generarItinerarioDePrueba();
+		PromocionExtranjero promocion = this.generarPromocionExtranjeroDePrueba();
+		
+		// creo un usuario que tiene domicilio en el exterior
+		PosicionGlobal posicionEnElExterior = new PosicionGlobal(531,531,"Posicion en el Exterior");
+		Usuario usuarioExtranjero = new Usuario("usuarioExtranjero",10000,12,12,promocion,TipoAtraccion.AVENTURA);
+		usuarioExtranjero.setPosicionDomicilio(posicionEnElExterior);
+		// ahora el generador para comparar si es extranjero
+		GeneradorVisitasEItinerarios generador = new GeneradorVisitasEItinerarios(itinerario.getAtracciones(),usuarioExtranjero);
+		
+		// valido si el usuario es extranjero y si le cobran el monto adecuado para todo el viaje (un solo ticket)
+		Assert.assertTrue(generador.esUsuarioExtranjero(itinerario.getAtracciones(), usuarioExtranjero));
+		Assert.assertEquals(200.0,promocion.calcularCostoPromocionalDelItinerario(itinerario),0.01);
 	}
 	
 	

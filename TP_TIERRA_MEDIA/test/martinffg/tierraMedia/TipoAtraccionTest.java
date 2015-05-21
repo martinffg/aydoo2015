@@ -9,7 +9,7 @@ import org.junit.Test;
 public class TipoAtraccionTest {
 	
 	@Test
-	public void probar1TipoAtraccionTest(){
+	public void prueba1CompararTipoAtraccionTest(){
 		
 		TipoAtraccion tipo1 = TipoAtraccion.AVENTURA;
 				
@@ -19,7 +19,7 @@ public class TipoAtraccionTest {
 	}
 	
 	@Test
-	public void probar2TipoAtraccionTest(){
+	public void prueba2CompararTipoAtraccionTest(){
 		
 		TipoAtraccion tipo2 = TipoAtraccion.PAISAJE;
 
@@ -29,7 +29,7 @@ public class TipoAtraccionTest {
 	}
 	
 	@Test
-	public void probar3TipoAtraccionTest(){
+	public void prueba3CompararTipoAtraccionTest(){
 		
 		TipoAtraccion tipo3 = TipoAtraccion.DEGUSTACION;
 

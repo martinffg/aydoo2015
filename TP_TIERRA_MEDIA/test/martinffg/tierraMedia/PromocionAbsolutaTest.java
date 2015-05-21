@@ -31,7 +31,7 @@ public class PromocionAbsolutaTest {
  	}
 	
 	@Test
-	public void probarDescuentoAbsolutoAItinerario(){
+	public void calcularDescuentoAbsolutoAItinerarioTest(){
 		
 		 PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
 		 PosicionGlobal posicionAldea = new PosicionGlobal(20,20,"Posicion Aldea");
@@ -60,11 +60,12 @@ public class PromocionAbsolutaTest {
 		 
 		 double descuentoObtenido = promocion.calcularDescuentoPromocionalAlItinerario(itinerario);
 		 
+		 // valido que el calculo del descuento sea correcto
 		 Assert.assertEquals(5.0,descuentoObtenido,0.01);
 	}
 	
 	@Test
-	public void probarTotalConDescuentoAbsolutoAItinerario(){
+	public void calcularTotalConDescuentoAbsolutoAItinerario(){
 		
 		 PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
 		 PosicionGlobal posicionAldea = new PosicionGlobal(20,20,"Posicion Aldea");
@@ -93,6 +94,8 @@ public class PromocionAbsolutaTest {
 		 
 		 double pagoConDescuento = promocion.calcularCostoPromocionalDelItinerario(itinerario);
 		 
+		 
+		 // valido que el valor devuelto sea consistente con el calculo
 		 Assert.assertEquals(395.0,pagoConDescuento,0.01);
 	}
   	 

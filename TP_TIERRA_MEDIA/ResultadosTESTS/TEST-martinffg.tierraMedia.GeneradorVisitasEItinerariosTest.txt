@@ -1,6 +1,6 @@
 Testsuite: martinffg.tierraMedia.GeneradorVisitasEItinerariosTest
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,016 sec
 
+Testcase: probarMetodoGetListaItinerariosSugeridosTEST took 0 sec
 Testcase: crearGeneradorVisitasEItinerariosTest took 0 sec
-Testcase: getListaVisitasSugeridasPorInteresYDistanciaRelativaUsuarioTEST took 0 sec
-Testcase: getListaItinerariosSugeridosTEST took 0 sec
+Testcase: probarMetodoGetListaVisitasSugeridasPorInteresYDistanciaRelativaUsuarioTEST took 0 sec

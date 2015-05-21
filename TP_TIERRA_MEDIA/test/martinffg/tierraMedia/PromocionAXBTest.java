@@ -31,7 +31,7 @@ public class PromocionAXBTest {
  	}
 	
 	@Test
-	public void probarDescuentoAXBAItinerario(){
+	public void calcularDescuentoAXBAItinerarioTest(){
 		
 		 PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
 		 PosicionGlobal posicionAldea = new PosicionGlobal(20,20,"Posicion Aldea");
@@ -62,12 +62,12 @@ public class PromocionAXBTest {
 		 PromocionAXB promocion = new PromocionAXB("Promo AXB Prueba",fechaVence,5.0);
 		 
 		 double descuentoObtenido = promocion.calcularDescuentoPromocionalAlItinerario(itinerario);
-		 
+		 // valido el resultado obtenido
 		 Assert.assertEquals(100.0,descuentoObtenido,0.01);
 	}
 	
 	@Test
-	public void probarTotalConDescuentoAXBAItinerario(){
+	public void calcularTotalConDescuentoAXBAItinerarioTest(){
 		
 		PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
 		 PosicionGlobal posicionAldea = new PosicionGlobal(20,20,"Posicion Aldea");
@@ -98,7 +98,7 @@ public class PromocionAXBTest {
 		 PromocionAXB promocion = new PromocionAXB("Promo AXB Prueba",fechaVence,5.0);
 		 
 		 double pagoConDescuento = promocion.calcularCostoPromocionalDelItinerario(itinerario);
-		 
+		 // valido el resultado obtenido
 		 Assert.assertEquals(400.0,pagoConDescuento,0.01);
 	}
   	 

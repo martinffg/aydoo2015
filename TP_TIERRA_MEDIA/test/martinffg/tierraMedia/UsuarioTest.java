@@ -13,7 +13,7 @@ import org.junit.Assert;
 public class UsuarioTest {
 
  @Test
-    public void crearUsuario(){
+    public void crearUsuarioTest(){
         
 	 	Date fechaHoy = new Date();
 	 	long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
@@ -21,13 +21,13 @@ public class UsuarioTest {
 	 
 	 	Usuario usuario = new Usuario("usuarioPrueba",10000,6,6,promocionAsignada,TipoAtraccion.AVENTURA); 
 	 	
-	 	// valido que se haya creado el usuario
+	 	// valido que se haya creado el usuario referencia no nula
 	 	Assert.assertNotNull(usuario);
  
  	}
  
  @Test
- 	public void probarConsultaDatosUsuario(){
+ 	public void consultaDatosCargadosEnUsuarioNuevoTest(){
 	 		 
 	 	Date fechaHoy = new Date();
 	 	long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
@@ -35,7 +35,7 @@ public class UsuarioTest {
 	 
 	 	Usuario usuario = new Usuario("usuarioPrueba",10000,6,6,promocionAsignada,TipoAtraccion.AVENTURA);
 	 
-	 	// valido que los datos ingresados en el creador por defecto sean correctos
+	 	// valido que los datos ingresados en el constructor sean correctos
 	 	Assert.assertEquals("usuarioPrueba", usuario.getNombre());
 	 	Assert.assertEquals("", usuario.getPassword());
 	 	Assert.assertEquals(6, usuario.getTiempoDisponibleVisitas(),0.01);
@@ -47,7 +47,7 @@ public class UsuarioTest {
  	}
  
  	@Test
- 	public void probarCambiosADatosUsuario(){
+ 	public void cambiarDatosAUsuarioCreadoTest(){
  		
  		Date fechaHoy = new Date();
 	 	long fechaVence = fechaHoy.getTime()+864000; // Dentro de 10 dias, uso formato TimeStamp
@@ -64,6 +64,7 @@ public class UsuarioTest {
  		usuario.setVelocidadTraslado(8);
  		usuario.setTipoAtraccionPreferida(TipoAtraccion.PAISAJE);
  		
+ 		//valido que los cambios hayan aplicado
  		Assert.assertEquals("Pepe", usuario.getNombre());
 	 	Assert.assertEquals("Lepuf", usuario.getPassword());
 	 	Assert.assertEquals(20, usuario.getPosicionActual().getCoordenada_X());

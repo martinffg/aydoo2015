@@ -17,20 +17,20 @@ public class AtraccionTest {
 	 	// creo atraccion nombre Mordor, en la pos 20,20, con costo 152,20, tiempo prom recorrido 122 de tipo Aventura
 	 	Atraccion atraccion = new Atraccion("Mordor",posicionMordor,152.20,1000,122.0,TipoAtraccion.AVENTURA); 
 	 	
-	 	// valido que se haya creado la atraccion
+	 	// valido que se haya creado la atraccion con puntero distinto de null
 	 	Assert.assertNotNull(atraccion);
  
  	}
  
  	@Test
-	public void probarConsultaDatosAtraccion(){
+	public void validarDatosAtraccionCreadaPorConstructor(){
 	 	
 	 	PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
      
 	 	// creo atraccion nombre Mordor, en la pos 10,10, con costo 152,20, tiempo prom recorrido 122 de tipo Aventura
 	 	Atraccion atraccion = new Atraccion("Mordor",posicionMordor,152.20,1000,122.0,TipoAtraccion.AVENTURA);
 	 
-	 	// valido que los datos ingresados en el creador por defecto sean correctos
+	 	// valido que los datos ingresados en el constructor sean correctos
 	 	Assert.assertEquals("Mordor", atraccion.getNombreAtraccion());
 	 	Assert.assertEquals(10, atraccion.getCoordenadasPosicion().getCoordenada_X());
 	 	Assert.assertEquals(10, atraccion.getCoordenadasPosicion().getCoordenada_Y());
@@ -57,6 +57,7 @@ public class AtraccionTest {
  		atraccion.setPromedioTiempoNecesarioParaVisitar(180.0);
  		atraccion.setTipoDeAtraccion(TipoAtraccion.PAISAJE);
  		
+ 		//valido los cambios realizados al objeto Atraccion
  		Assert.assertEquals("GondorLand", atraccion.getNombreAtraccion());
 	 	Assert.assertEquals(30, atraccion.getCoordenadasPosicion().getCoordenada_X());
 	 	Assert.assertEquals(30, atraccion.getCoordenadasPosicion().getCoordenada_Y());

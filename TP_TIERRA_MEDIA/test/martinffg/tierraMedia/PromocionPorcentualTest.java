@@ -31,7 +31,7 @@ public class PromocionPorcentualTest {
  	}
 	
 	@Test
-	public void probarDescuentoPorcentualAItinerario(){
+	public void calcularDescuentoPorcentualAItinerarioTest(){
 		
 		 PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
 		 PosicionGlobal posicionAldea = new PosicionGlobal(20,20,"Posicion Aldea");
@@ -60,11 +60,12 @@ public class PromocionPorcentualTest {
 		 
 		 double descuentoObtenido = promocion.calcularDescuentoPromocionalAlItinerario(itinerario);
 		 
+		 // valido el resultado obtenido
 		 Assert.assertEquals(20.0,descuentoObtenido,0.01);
 	}
 	
 	@Test
-	public void probarTotalConDescuentoPorcentualAItinerario(){
+	public void calcularTotalConDescuentoPorcentualAItinerarioTest(){
 		
 		 PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
 		 PosicionGlobal posicionAldea = new PosicionGlobal(20,20,"Posicion Aldea");
@@ -92,7 +93,7 @@ public class PromocionPorcentualTest {
 		 PromocionPorcentual promocion = new PromocionPorcentual("Promo Porcentual Prueba",fechaVence,5.0);
 		 
 		 double pagoConDescuento = promocion.calcularCostoPromocionalDelItinerario(itinerario);
-		 
+		 // valido el resultado obtenido
 		 Assert.assertEquals(380.0,pagoConDescuento,0.01);
 	}
   	 

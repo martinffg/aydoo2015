@@ -27,7 +27,7 @@ public class ItinerarioTest {
  	}
  
  @Test 
- public void cargarAtraccionTest() {
+ public void cargarAtraccionEnItinerarioTest() {
 	 
 	 PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
      // creo atraccion nombre Mordor, en la pos 20,20, con costo 152,20, tiempo prom recorrido 122 de tipo Aventura
@@ -45,7 +45,7 @@ public class ItinerarioTest {
  }
 
  @Test 
-	public void cargarListaDeAtraccionesTest() {
+	public void cargarAtraccionesEnListaDelItinerarioTest() {
 		 
 		 PosicionGlobal posicionMordor = new PosicionGlobal(10,10,"Posicion Mordor");
 		 PosicionGlobal posicionAldea = new PosicionGlobal(20,20,"Posicion Aldea");
@@ -68,7 +68,7 @@ public class ItinerarioTest {
 		 
 		 itinerario.setAtracciones(atracciones);
 		 
-		 // valido los datos ingresados de las atracciones
+		 // valido los datos ingresados al itinerario tras procesar la info de las atracciones 
 		 Assert.assertEquals(400.00, itinerario.getCostoTotalItinerario(),0.01);
 		 Assert.assertEquals(3,itinerario.getCantidadAtraccionesIncluidas());
 		 Assert.assertEquals(300.0, itinerario.getTiempoTotalItinerario(),0.01); 

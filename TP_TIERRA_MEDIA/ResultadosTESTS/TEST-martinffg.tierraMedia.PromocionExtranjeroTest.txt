@@ -1,6 +1,7 @@
 Testsuite: martinffg.tierraMedia.PromocionExtranjeroTest
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,015 sec
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,031 sec
 
-Testcase: probarDescuentoExtranjeroAItinerario took 0 sec
+Testcase: calcularDescuentoExtranjeroAItinerarioTest took 0 sec
+Testcase: calcularTotalConDescuentoPorcentualAItinerarioTest took 0 sec
+Testcase: calcularCostoConDescuentoAUsuarioExtranjeroValidadoTest took 0,016 sec
 Testcase: crearPromocionTest took 0 sec
-Testcase: probarTotalConDescuentoPorcentualAItinerario took 0 sec
