@@ -7,7 +7,7 @@ public class PromocionPaqueteFamiliar extends Promocion {
 	// el valorDescuento es indiferente en el constructor
 	public PromocionPaqueteFamiliar(String nombre,long fechaVencimiento,double valorDescuento){
 	
-		super(nombre,fechaVencimiento,valorDescuento,TipoPromocion.PAQUETE_FAMILIAR);
+		super(nombre,fechaVencimiento,valorDescuento);
 		
 	}
 	

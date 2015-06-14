@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.ListIterator;
 
 import martinffg.tierraMedia.PromocionPaqueteFamiliar;
-import martinffg.tierraMedia.TipoPromocion;
 
 import org.junit.Test;
 import org.junit.Assert;
@@ -24,7 +23,7 @@ public class PromocionPaqueteFamiliarTest {
 	 	Assert.assertEquals("Promo Paquete Familiar Prueba", promocion.getNombrePromocion());
 	 	Assert.assertEquals(fechaVence, promocion.getUltimoDiaVigencia());
 	 	Assert.assertEquals(0.0, promocion.getValorDescuento(),0.01);
-	 	Assert.assertEquals(TipoPromocion.PAQUETE_FAMILIAR,promocion.getTipoPromocion());
+	 	Assert.assertEquals(PromocionPaqueteFamiliar.class,promocion.getClass());
 	 	
  	}
 	

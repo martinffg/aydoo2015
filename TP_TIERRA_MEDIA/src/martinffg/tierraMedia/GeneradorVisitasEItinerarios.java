@@ -125,7 +125,7 @@ public class GeneradorVisitasEItinerarios {
 				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
 				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/visitante.getVelocidadTraslado();
 				
-				if ((cantidadGrupoFamiliar>=4)&&(visitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+				if ((cantidadGrupoFamiliar>=4)&&(visitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
 					
 					descuentoGrupoFamiliarSinOrden+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
 					
@@ -146,7 +146,7 @@ public class GeneradorVisitasEItinerarios {
 		}
 		
 		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
-		if ((cantidadGrupoFamiliar>=4)&&(visitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+		if ((cantidadGrupoFamiliar>=4)&&(visitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
 			costoPromoSinOrden = itinerarioSinOrden.getCostoTotalItinerario()-descuentoGrupoFamiliarSinOrden;
 		} else { 
 			costoPromoSinOrden = visitante.getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioSinOrden);
@@ -187,7 +187,7 @@ public class GeneradorVisitasEItinerarios {
 				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
 				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
 				
-				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
 					
 					descuentoGrupoFamiliarPreferidos+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
 					
@@ -209,7 +209,7 @@ public class GeneradorVisitasEItinerarios {
 		}
 		
 		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
-		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
 			costoPromoPreferidos = itinerarioPreferidos.getCostoTotalItinerario()-descuentoGrupoFamiliarPreferidos;
 		} else { 
 			costoPromoPreferidos = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioPreferidos);
@@ -254,7 +254,7 @@ public class GeneradorVisitasEItinerarios {
 				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
 				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
 				
-				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
 					descuentoGrupoFamiliarIncomodos+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
 				}
 				
@@ -273,7 +273,7 @@ public class GeneradorVisitasEItinerarios {
 		}	
 		
 		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
-		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getTipoPromocion()==TipoPromocion.PAQUETE_FAMILIAR)){
+		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
 			costoPromoIncomodos = itinerarioIncomodo.getCostoTotalItinerario()-descuentoGrupoFamiliarIncomodos;
 		} else { 
 			costoPromoIncomodos = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioIncomodo);

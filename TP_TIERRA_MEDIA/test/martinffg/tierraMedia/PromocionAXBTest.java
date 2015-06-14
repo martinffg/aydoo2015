@@ -7,8 +7,6 @@ import martinffg.tierraMedia.Itinerario;
 import martinffg.tierraMedia.PosicionGlobal;
 import martinffg.tierraMedia.PromocionAXB;
 import martinffg.tierraMedia.TipoAtraccion;
-import martinffg.tierraMedia.TipoPromocion;
-
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -26,7 +24,7 @@ public class PromocionAXBTest {
 	 	Assert.assertEquals("Promo AXB Prueba", promocion.getNombrePromocion());
 	 	Assert.assertEquals(fechaVence, promocion.getUltimoDiaVigencia());
 	 	Assert.assertEquals(5.0, promocion.getValorDescuento(),0.01);
-	 	Assert.assertEquals(TipoPromocion.AXB,promocion.getTipoPromocion());
+	 	Assert.assertEquals(PromocionAXB.class,promocion.getClass());
 	 	
  	}
 	

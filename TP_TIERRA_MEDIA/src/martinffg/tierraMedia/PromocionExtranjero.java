@@ -6,7 +6,7 @@ public class PromocionExtranjero extends Promocion {
 	
 	public PromocionExtranjero(String nombre,long fechaVencimiento,double valorDescuento){
 		
-		super(nombre,fechaVencimiento,valorDescuento,TipoPromocion.EXTRANJERO);
+		super(nombre,fechaVencimiento,valorDescuento);
 		
 	}
 	

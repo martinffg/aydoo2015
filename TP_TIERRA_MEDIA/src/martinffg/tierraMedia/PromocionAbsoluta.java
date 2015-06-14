@@ -6,7 +6,7 @@ public class PromocionAbsoluta extends Promocion {
 	
 	public PromocionAbsoluta(String nombre,long fechaVencimiento,double valorDescuento){
 		
-		super(nombre,fechaVencimiento,valorDescuento,TipoPromocion.ABSOLUTA);
+		super(nombre,fechaVencimiento,valorDescuento);
 		
 	}
 	

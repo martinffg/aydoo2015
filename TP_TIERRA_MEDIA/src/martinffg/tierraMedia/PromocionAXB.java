@@ -8,7 +8,7 @@ public class PromocionAXB extends Promocion {
 	
 	public PromocionAXB(String nombre,long fechaVencimiento,double valorDescuento){
 		
-		super(nombre,fechaVencimiento,valorDescuento,TipoPromocion.AXB);
+		super(nombre,fechaVencimiento,valorDescuento);
 		
 	}
 	

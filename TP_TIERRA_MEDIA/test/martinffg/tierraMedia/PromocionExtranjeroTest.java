@@ -2,10 +2,7 @@ package martinffg.tierraMedia;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 import martinffg.tierraMedia.PromocionExtranjero;
-import martinffg.tierraMedia.TipoPromocion;
-
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -23,7 +20,7 @@ public class PromocionExtranjeroTest {
 	 	Assert.assertEquals("Promo Extranjero Prueba", promocion.getNombrePromocion());
 	 	Assert.assertEquals(fechaVence, promocion.getUltimoDiaVigencia());
 	 	Assert.assertEquals(50.0, promocion.getValorDescuento(),0.01);
-	 	Assert.assertEquals(TipoPromocion.EXTRANJERO,promocion.getTipoPromocion());
+	 	Assert.assertEquals(PromocionExtranjero.class,promocion.getClass());
 	 	
  	}
 	
