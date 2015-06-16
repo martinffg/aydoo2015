@@ -9,8 +9,6 @@ public class GeneradorVisitasEItinerarios {
 	
 	private ArrayList<Atraccion> listaAtraccionesDeTierraMedia;
 	private Usuario usuarioVisitante; 
-	
-	//private ArrayList<Atraccion> listaVisitasSugeridasPorInteresYDistanciaRelativaUsuario; 
 	private ArrayList<Itinerario> listaItinerariosSugeridos;
 	
 	public GeneradorVisitasEItinerarios(ArrayList<Atraccion> listaAtracciones,Usuario visitante){
@@ -102,6 +100,7 @@ public class GeneradorVisitasEItinerarios {
 		
 		PosicionGlobal posicionUsuario = visitante.getPosicionActual();
 		int cantidadGrupoFamiliar= visitante.getCantidadTicketsGrupoFamiliar();
+		boolean usuarioExtranjero = this.esUsuarioExtranjero(this.listaAtraccionesDeTierraMedia, visitante);
 		double tiempoViajeAlaAtraccionActual = 0.0; // En Horas
 		double distanciaAlUsuario = 0.0; // En KM/H
 		double costoPromoSinOrden = 0.0;
@@ -125,7 +124,7 @@ public class GeneradorVisitasEItinerarios {
 				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
 				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/visitante.getVelocidadTraslado();
 				
-				if ((cantidadGrupoFamiliar>=4)&&(visitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
+				if ((cantidadGrupoFamiliar>=4)&&(!usuarioExtranjero)){
 					
 					descuentoGrupoFamiliarSinOrden+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
 					
@@ -146,7 +145,7 @@ public class GeneradorVisitasEItinerarios {
 		}
 		
 		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
-		if ((cantidadGrupoFamiliar>=4)&&(visitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
+		if ((cantidadGrupoFamiliar>=4)&&(!usuarioExtranjero)){
 			costoPromoSinOrden = itinerarioSinOrden.getCostoTotalItinerario()-descuentoGrupoFamiliarSinOrden;
 		} else { 
 			costoPromoSinOrden = visitante.getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioSinOrden);
@@ -161,6 +160,7 @@ public class GeneradorVisitasEItinerarios {
 		
 		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
 		int cantidadGrupoFamiliar= this.usuarioVisitante.getCantidadTicketsGrupoFamiliar();
+		boolean usuarioExtranjero = this.esUsuarioExtranjero(this.listaAtraccionesDeTierraMedia, visitante);
 		
 		double tiempoViajeAlaAtraccionActual = 0.0; // En Horas
 		double distanciaAlUsuario = 0.0; // En KM/H
@@ -187,7 +187,7 @@ public class GeneradorVisitasEItinerarios {
 				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
 				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
 				
-				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
+				if ((cantidadGrupoFamiliar>=4)&&(!usuarioExtranjero)){
 					
 					descuentoGrupoFamiliarPreferidos+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
 					
@@ -209,7 +209,7 @@ public class GeneradorVisitasEItinerarios {
 		}
 		
 		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
-		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
+		if ((cantidadGrupoFamiliar>=4)&&(!usuarioExtranjero)){
 			costoPromoPreferidos = itinerarioPreferidos.getCostoTotalItinerario()-descuentoGrupoFamiliarPreferidos;
 		} else { 
 			costoPromoPreferidos = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioPreferidos);
@@ -224,6 +224,7 @@ public class GeneradorVisitasEItinerarios {
 		// inicializo variables locales necesarias
 		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
 		int cantidadGrupoFamiliar= this.usuarioVisitante.getCantidadTicketsGrupoFamiliar();
+		boolean usuarioExtranjero = this.esUsuarioExtranjero(this.listaAtraccionesDeTierraMedia, visitante);
 		
 		double tiempoViajeAlaAtraccionActual = 0.0; // En Horas
 		double distanciaAlUsuario = 0.0; // En KM/H
@@ -254,7 +255,7 @@ public class GeneradorVisitasEItinerarios {
 				distanciaAlUsuario = posicionUsuario.getDistanciaPuntoRemoto(atraccionActual.getCoordenadasPosicion());
 				tiempoViajeAlaAtraccionActual = distanciaAlUsuario/this.getUsuarioVisitante().getVelocidadTraslado();
 				
-				if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
+				if ((cantidadGrupoFamiliar>=4)&&(!usuarioExtranjero)){
 					descuentoGrupoFamiliarIncomodos+= atraccionActual.getCostoVisita()*(4*0.10+(cantidadGrupoFamiliar-4)*0.30);
 				}
 				
@@ -273,7 +274,7 @@ public class GeneradorVisitasEItinerarios {
 		}	
 		
 		// A LOS COSTOS CALCULADOS LES APLICO LAS PROMOCIONES VIGENTES PARA CADA USUARIO (EN SU PERFIL)
-		if ((cantidadGrupoFamiliar>=4)&&(this.usuarioVisitante.getPromocionAsignada().getClass()==PromocionPaqueteFamiliar.class)){
+		if ((cantidadGrupoFamiliar>=4)&&(!usuarioExtranjero)){
 			costoPromoIncomodos = itinerarioIncomodo.getCostoTotalItinerario()-descuentoGrupoFamiliarIncomodos;
 		} else { 
 			costoPromoIncomodos = this.getUsuarioVisitante().getPromocionAsignada().calcularCostoPromocionalDelItinerario(itinerarioIncomodo);
@@ -314,8 +315,8 @@ public class GeneradorVisitasEItinerarios {
 		return usuarioVisitante;
 	}
 		
-@SuppressWarnings({ "unchecked", "rawtypes" })
-private ArrayList<Atraccion> getListaVisitasSugeridasPorDESINTERESYDistanciaRelativaUsuario() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    private ArrayList<Atraccion> getListaVisitasSugeridasPorDESINTERESYDistanciaRelativaUsuario() {
 		
 		PosicionGlobal posicionUsuario = this.getUsuarioVisitante().getPosicionActual();
 			

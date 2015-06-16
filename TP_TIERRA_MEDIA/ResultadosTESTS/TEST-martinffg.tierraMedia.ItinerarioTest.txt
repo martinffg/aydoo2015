@@ -1,6 +1,6 @@
 Testsuite: martinffg.tierraMedia.ItinerarioTest
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,015 sec
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,016 sec
 
-Testcase: crearItinerarioTest took 0,002 sec
-Testcase: cargarAtraccionEnItinerarioTest took 0,002 sec
-Testcase: cargarAtraccionesEnListaDelItinerarioTest took 0 sec
+Testcase: cargarAtraccionesEnListaDelItinerarioTest took 0,003 sec
+Testcase: crearItinerarioTest took 0 sec
+Testcase: cargarAtraccionEnItinerarioTest took 0 sec

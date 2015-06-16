@@ -25,7 +25,6 @@ public class PromocionAbsolutaTest {
 	 	Assert.assertEquals("Promo Absoluta Prueba", promocion.getNombrePromocion());
 	 	Assert.assertEquals(fechaVence, promocion.getUltimoDiaVigencia());
 	 	Assert.assertEquals(5.0, promocion.getValorDescuento(),0.01);
-	 	Assert.assertEquals(PromocionAbsoluta.class,promocion.getClass());
 	 	
  	}
 	

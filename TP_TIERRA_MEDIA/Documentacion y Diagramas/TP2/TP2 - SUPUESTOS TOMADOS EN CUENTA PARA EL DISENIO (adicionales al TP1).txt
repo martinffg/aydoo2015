@@ -15,3 +15,4 @@ Supuestos adicionales - requeridos para el TP2:
 
 * El usuario extranjero (con su domicilio a + de 200 KM) se crea como cualquier usuario común, por definición con domicilio en el (0,0) salvo especificación contraria posterior al momento de la creación.
 * Asumo que el usuario o visitante que compra las entradas por definición lo hace para un sólo miembro del grupo familiar, sino debe especificarse luego cuántos miembros en total serán (el usuario + sus familiares), pues todos realizarán las mismas actividades en conjunto.
+* La promoción familiar puede aplicarse adicionalmente al resto de las promociones (excepto la promo extranjero).  Por ello, con solo saber si un usuario no es extranjero y quiere 4 o más entradas para su grupo familiar, se le aplicará el descuento familiar acumulada a cualquier otra promocion (excepto extranjero).

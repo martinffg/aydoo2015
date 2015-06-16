@@ -1,6 +1,6 @@
 Testsuite: martinffg.tierraMedia.PromocionPorcentualTest
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,017 sec
 
-Testcase: calcularDescuentoPorcentualAItinerarioTest took 0,005 sec
-Testcase: crearPromocionTest took 0,001 sec
+Testcase: crearPromocionTest took 0,003 sec
+Testcase: calcularDescuentoPorcentualAItinerarioTest took 0,002 sec
 Testcase: calcularTotalConDescuentoPorcentualAItinerarioTest took 0 sec

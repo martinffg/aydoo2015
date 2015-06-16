@@ -23,7 +23,6 @@ public class PromocionPaqueteFamiliarTest {
 	 	Assert.assertEquals("Promo Paquete Familiar Prueba", promocion.getNombrePromocion());
 	 	Assert.assertEquals(fechaVence, promocion.getUltimoDiaVigencia());
 	 	Assert.assertEquals(0.0, promocion.getValorDescuento(),0.01);
-	 	Assert.assertEquals(PromocionPaqueteFamiliar.class,promocion.getClass());
 	 	
  	}
 	

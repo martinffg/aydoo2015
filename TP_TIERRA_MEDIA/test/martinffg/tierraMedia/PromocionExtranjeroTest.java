@@ -20,8 +20,7 @@ public class PromocionExtranjeroTest {
 	 	Assert.assertEquals("Promo Extranjero Prueba", promocion.getNombrePromocion());
 	 	Assert.assertEquals(fechaVence, promocion.getUltimoDiaVigencia());
 	 	Assert.assertEquals(50.0, promocion.getValorDescuento(),0.01);
-	 	Assert.assertEquals(PromocionExtranjero.class,promocion.getClass());
-	 	
+	 		 	
  	}
 	
 	@Test
